@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (userRepository.findByEmail(user.getEmail()).isPresent())
             throw new UserAlreadyExistsException("user with email " + user.getEmail() + "already exists");
-        return userRepository.insert(user);
+        return userRepository.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        return userRepository.(email).orElseThrow(() -> new UserNotFoundException(
+        return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(
                 "user  with email " + email + "was not found"));
     }
 }
