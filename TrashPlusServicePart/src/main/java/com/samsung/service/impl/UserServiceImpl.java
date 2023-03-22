@@ -6,6 +6,7 @@ import com.samsung.exception.UserNotFoundException;
 import com.samsung.repository.UserRepository;
 import com.samsung.service.UserService;
 import lombok.RequiredArgsConstructor;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,6 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(
-                "user  with email " + email + "was not found"));
+                "user  with email " + email + " was not found"));
     }
 }

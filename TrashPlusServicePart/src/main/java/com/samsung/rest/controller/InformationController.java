@@ -2,6 +2,7 @@ package com.samsung.rest.controller;
 
 import com.samsung.service.InformationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class InformationController {
 
+    @Autowired
     private final InformationService informationService;
 
     @GetMapping(path = "/information/user")
