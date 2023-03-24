@@ -12,7 +12,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class InformationController {
 
-    @Autowired
     private final InformationService informationService;
 
     @GetMapping(path = "/information/user")
