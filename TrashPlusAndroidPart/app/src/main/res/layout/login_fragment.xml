@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/v_login_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_login_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_login_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <TextView
+        android:id="@+id/tv_login_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_login_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <TextView
+        android:id="@+id/tv_login_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in to your account"
+        android:textColor="@color/hint_color"
+        app:layout_constraintVertical_bias="0.015"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_hello" />
+
+    <EditText
+        android:id="@+id/et_login_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_form"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:padding="7dp"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_description" />
+
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_form"
+        android:hint="Password"
+        android:textColor="@color/black"
+        android:padding="7dp"
+        android:inputType="textPassword"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@id/et_login_email" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_login_sign_in"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@+id/et_login_password"
+        android:background="@drawable/purple_button"
+        android:text="Login"
+        android:textColor="@color/white"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <ImageView
+        android:id="@+id/iv_login_or"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/line_or"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@id/bt_login_sign_in"
+        app:layout_constraintDimensionRatio="15:1"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_login_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_button"
+        android:text="Sign Up"
+        android:textColor="@color/hint_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_login_left"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_or"
+        app:layout_constraintVertical_bias="0.05" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

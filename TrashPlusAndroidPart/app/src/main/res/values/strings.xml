@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MasterclassSpringSecurity</string>
+    <string name="information_about_user">Information about user:</string>
+    <string name="user_info">User info:</string>
+</resources>

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class User {
     @Column(name = "address")
     private String address;
 
+    // TODO: improve system with Date class
     @Column(name = "birth_date")
     private String birthDate;
 

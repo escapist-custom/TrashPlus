@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_registration_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_registration_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <TextView
+        android:id="@+id/tv_registration_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <TextView
+        android:id="@+id/tv_registration_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create new account"
+        android:textColor="@color/hint_color"
+        app:layout_constraintVertical_bias="0.015"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_registration_hello" />
+
+    <EditText
+        android:id="@+id/et_registration_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_form"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:padding="7dp"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_registration_description" />
+
+    <EditText
+        android:id="@+id/et_registration_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_form"
+        android:hint="Full name"
+        android:padding="7dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toBottomOf="@+id/et_registration_email"
+        app:layout_constraintVertical_bias="0.1" />
+
+
+    <EditText
+        android:id="@+id/et_registration_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_form"
+        android:hint="Password"
+        android:padding="7dp"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/black"
+        app:layout_constraintVertical_bias="0.1"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_full_name" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_registration_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toBottomOf="@+id/et_registration_password"
+        android:background="@drawable/purple_button"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        app:layout_constraintVertical_bias="0.2"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

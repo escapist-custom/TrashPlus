@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/purple">
+
+    <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/dl_registration_left"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_registration_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+
+    <TextView
+        android:id="@+id/tv_info_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_info_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/white_round_background"/>
+
+    <TextView
+        android:id="@+id/tv_info_user_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/information_about_user"
+        android:textColor="@color/hint_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/v_info_background"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/tv_info_user_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <!--***********************************************-->
+
+    <TextView
+        android:id="@+id/tv_info_user_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/tv_info_user_information"
+        app:layout_constraintTop_toBottomOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="0.5dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_info_user_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/tv_info_user_birthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/tv_info_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/tv_info_user_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
+        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
+        app:layout_constraintVertical_bias="0.05"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
