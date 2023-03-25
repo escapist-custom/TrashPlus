@@ -24,14 +24,14 @@ public class RegistrationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.registration_fragment, container, false);
         EditText et_email = view.findViewById(R.id.et_registration_email);
-        EditText et_fullName = view.findViewById(R.id.et_registration_full_name);
+        EditText et_nickName = view.findViewById(R.id.et_registration_nick_name);
         EditText et_password = view.findViewById(R.id.et_registration_password);
         AppCompatButton bt_signUp = view.findViewById(R.id.bt_registration_sign_up);
         bt_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AppApiVolley(RegistrationFragment.this).insertUser(
-                        new User(et_email.getText().toString(), et_fullName.getText().toString(),
+                        new User(et_email.getText().toString(), et_nickName.getText().toString(),
                                 et_password.getText().toString()));
             }
         });

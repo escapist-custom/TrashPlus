@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_info_user_information"
         app:layout_constraintTop_toBottomOf="@id/tv_info_user_description"
         app:layout_constraintVertical_bias="0.05"
-        android:layout_marginTop="0.5dp"
+        android:layout_marginTop="5dp"
         />
 
     <TextView
@@ -94,10 +94,11 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
-        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintStart_toStartOf="@+id/tv_info_user_information"
+        app:layout_constraintTop_toBottomOf="@id/tv_info_user_nickname"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="5dp"
+        />
 
     <TextView
         android:id="@+id/tv_info_user_birthDate"
@@ -107,10 +108,11 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
-        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintStart_toStartOf="@+id/tv_info_user_information"
+        app:layout_constraintTop_toBottomOf="@id/tv_info_user_address"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="5dp"
+        />
 
     <TextView
         android:id="@+id/tv_info_user_email"
@@ -122,8 +124,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_birthDate"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:id="@+id/tv_info_user_password"
@@ -135,7 +138,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/v_info_background"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toTopOf="@id/tv_info_user_description"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintTop_toTopOf="@id/tv_info_user_email"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

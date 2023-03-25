@@ -33,13 +33,13 @@ public class LoginFragment extends Fragment {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
+                /*try {
                     AppApiVolley volley = new AppApiVolley(LoginFragment.this);
                     volley.findUserByEmail(et_email.getText().toString(),
                             et_password.getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
         bt_registration.setOnClickListener(new View.OnClickListener() {

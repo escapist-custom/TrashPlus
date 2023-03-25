@@ -19,19 +19,31 @@ import org.json.JSONException;
 
 public class InformationFragment extends Fragment {
 
-    private TextView tv_hello;
     private TextView tv_userInfo;
-    private TextView tv_adminInfo;
+    private TextView tv_nickName;
+    private TextView tv_address;
+    private TextView tv_birthDate;
+    private TextView tv_email;
+    private TextView tv_password;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_fragment, container, false);
-        /*new AppApiVolley(this).getUserInformation();
-        new AppApiVolley(this).getAdminInformation();*/
+//        new AppApiVolley(this).getUserInformation();
+//        new AppApiVolley(this).getAdminInformation();
         tv_userInfo = view.findViewById(R.id.tv_info_user_information);
-        tv_hello = view.findViewById(R.id.tv_info_hello);
-        tv_hello.setText("Hello, " + UserCache.getCurrentUser().getNickName() + "!");
+        tv_nickName = view.findViewById(R.id.tv_info_user_nickname);
+        tv_address = view.findViewById(R.id.tv_info_user_address);
+        tv_birthDate = view.findViewById(R.id.tv_info_user_birthDate);
+        tv_email = view.findViewById(R.id.tv_info_user_email);
+        tv_password = view.findViewById(R.id.tv_info_user_password);
+        //----------------
+        tv_nickName.setText("Hello, " + UserCache.getCurrentUser().getNickName() + "!");
+        tv_address.setText("Address: " + UserCache.getCurrentUser().getAddress());
+        tv_birthDate.setText("Birth date: " + UserCache.getCurrentUser().getBirthDate());
+        tv_email.setText("Email: " + UserCache.getCurrentUser().getEmail());
+        tv_password.setText("Password: " + UserCache.getCurrentUser().getPassword());
         return view;
     }
 
@@ -39,7 +51,27 @@ public class InformationFragment extends Fragment {
         tv_userInfo.setText(userInfo);
     }
 
-    public void setAdminInfo(String adminInfo){
-        tv_adminInfo.setText(adminInfo);
+    public void setTv_userInfo(TextView tv_userInfo) {
+        this.tv_userInfo = tv_userInfo;
+    }
+
+    public void setTv_nickName(TextView tv_nickName) {
+        this.tv_nickName = tv_nickName;
+    }
+
+    public void setTv_address(TextView tv_address) {
+        this.tv_address = tv_address;
+    }
+
+    public void setTv_birthDate(TextView tv_birthDate) {
+        this.tv_birthDate = tv_birthDate;
+    }
+
+    public void setTv_email(TextView tv_email) {
+        this.tv_email = tv_email;
+    }
+
+    public void setTv_password(TextView tv_password) {
+        this.tv_password = tv_password;
     }
 }

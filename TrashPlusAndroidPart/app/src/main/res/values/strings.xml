@@ -2,4 +2,12 @@
     <string name="app_name">MasterclassSpringSecurity</string>
     <string name="information_about_user">Information about user:</string>
     <string name="user_info">User info:</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="registration">Registration</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="birth_date">Birth date</string>
 </resources>
