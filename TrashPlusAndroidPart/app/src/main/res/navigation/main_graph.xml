@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.androidpart.fragment.InformationFragment"
+        android:label="InformationFragment"
+        tools:layout="@layout/information_fragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.androidpart.fragment.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.androidpart.fragment.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/registration_fragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.androidpart.MainActivity"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+</navigation>

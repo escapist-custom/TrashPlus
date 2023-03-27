@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
     @Autowired
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @GetMapping("/user/{email}")
     public UserDto findUserByEmail(@PathVariable("email") String email){

@@ -10,11 +10,8 @@ public class User {
     private long uid;
     private String nickName;
     private String address;
-
     private String birthDate;
-
     private String email;
-
     private String password;
 
     public User(String nickName, String address, String birthDate, String email, String password) {

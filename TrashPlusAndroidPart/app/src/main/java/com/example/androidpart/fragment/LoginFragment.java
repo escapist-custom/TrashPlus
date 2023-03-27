@@ -14,11 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidpart.R;
-import com.example.androidpart.cache.UserCache;
-import com.example.androidpart.domain.User;
-// import com.example.androidpart.rest.AppApiVolley;
+import com.example.androidpart.rest.AppApi;
+import com.example.androidpart.rest.impl.AppApiVolley;
 
-import org.json.JSONException;
 
 public class LoginFragment extends Fragment {
 
@@ -33,13 +31,9 @@ public class LoginFragment extends Fragment {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*try {
-                    AppApiVolley volley = new AppApiVolley(LoginFragment.this);
-                    volley.findUserByEmail(et_email.getText().toString(),
-                            et_password.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
+                AppApi volley = new AppApiVolley(LoginFragment.this);
+                volley.findUserByEmail(et_email.getText().toString(),
+                        et_password.getText().toString());
             }
         });
         bt_registration.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +50,6 @@ public class LoginFragment extends Fragment {
                 .navigate(R.id.action_loginFragment_to_informationFragment);
     }
     public void makeToastBadCredentials(){
-        Toast.makeText(getContext(), "Ошибка в логине или пароле", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Error in login or password", Toast.LENGTH_SHORT).show();
     }
 }

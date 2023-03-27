@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.androidpart.R;
 import com.example.androidpart.cache.UserCache;
 import com.example.androidpart.domain.User;
-// import com.example.androidpart.rest.AppApiVolley;
+import com.example.androidpart.rest.impl.AppApiVolley;
 
 import org.json.JSONException;
 
@@ -26,13 +26,13 @@ public class InformationFragment extends Fragment {
     private TextView tv_email;
     private TextView tv_password;
 
+    // TODO: transfer to SQLite database
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_fragment, container, false);
-//        new AppApiVolley(this).getUserInformation();
-//        new AppApiVolley(this).getAdminInformation();
-        tv_userInfo = view.findViewById(R.id.tv_info_user_information);
+        new AppApiVolley(this).getUserInfo();
+        tv_userInfo = view.findViewById(R.id.tv_info_user_info);
         tv_nickName = view.findViewById(R.id.tv_info_user_nickname);
         tv_address = view.findViewById(R.id.tv_info_user_address);
         tv_birthDate = view.findViewById(R.id.tv_info_user_birthDate);
@@ -47,8 +47,8 @@ public class InformationFragment extends Fragment {
         return view;
     }
 
-    public void setUserInfo(String userInfo){
-        tv_userInfo.setText(userInfo);
+    public void setInfo(String info) {
+        tv_userInfo.setText(info);
     }
 
     public void setTv_userInfo(TextView tv_userInfo) {
