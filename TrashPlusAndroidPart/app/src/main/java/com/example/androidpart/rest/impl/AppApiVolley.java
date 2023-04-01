@@ -1,6 +1,8 @@
 package com.example.androidpart.rest.impl;
 
 import android.app.VoiceInteractor;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Base64;
 import android.util.JsonReader;
 import android.util.Log;
@@ -20,6 +22,8 @@ import com.example.androidpart.domain.User;
 import com.example.androidpart.fragment.InformationFragment;
 import com.example.androidpart.fragment.LoginFragment;
 import com.example.androidpart.fragment.RegistrationFragment;
+import com.example.androidpart.repository.TrashPlusContract;
+import com.example.androidpart.repository.TrashPlusDbOpenHelper;
 import com.example.androidpart.rest.AppApi;
 import com.example.androidpart.rest.mapper.UserMapper;
 
@@ -34,6 +38,8 @@ public class AppApiVolley implements AppApi {
 
     private static final String BASE_URL = "http://192.168.1.49:8080";
     private Fragment fragment;
+
+    private TrashPlusDbOpenHelper openHelper = new TrashPlusDbOpenHelper(fragment.getContext());
     private Response.ErrorListener errorListener;
 
     public AppApiVolley(Fragment fragment) {
@@ -43,6 +49,7 @@ public class AppApiVolley implements AppApi {
 
     @Override
     public void findUserByEmail(String email, String password) {
+
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user/" + email;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -52,7 +59,8 @@ public class AppApiVolley implements AppApi {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    UserCache.setCurrent_user(UserMapper.getFromJson(response, password));
+                    // UserCache.setCurrent_user(UserMapper.getFromJson(response, password));
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -84,6 +92,8 @@ public class AppApiVolley implements AppApi {
 
     @Override
     public void insert(User user) {
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user";
         JSONObject params = new JSONObject();
@@ -96,13 +106,21 @@ public class AppApiVolley implements AppApi {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+
+        ContentValues values = new ContentValues();
+        values.put(TrashPlusContract.TrashEntry.COLUMN_NICK_NAME, user.getNickName());
+        values.put(TrashPlusContract.TrashEntry.COLUMN_ADDRESS, user.getAddress());
+        values.put(TrashPlusContract.TrashEntry.COLUMN_BIRTH_DATE, user.getBirthDate());
+        values.put(TrashPlusContract.TrashEntry.COLUMN_EMAIL, user.getEmail());
+        values.put(TrashPlusContract.TrashEntry.COLUMN_PASSWORD, user.getPassword());
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 url, params,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        UserCache.setCurrent_user(user);
+                        db.insert(TrashPlusContract.TrashEntry.TABLE_NAME, null, values);
                         if (fragment.getClass().equals(RegistrationFragment.class)) {
                             ((RegistrationFragment) fragment).signIn();
                         }

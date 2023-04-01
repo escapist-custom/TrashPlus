@@ -5,14 +5,12 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yml
   datasource:
-    url: jdbc:h2:mem:trash_plus_service
-    driverClassName: org.h2.Driver
-  h2:
-    console:
-      enabled: true
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/users
+    driverClassName: org.postgresql.Driver
+    username: postgres
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    showsql: true
-    generate-ddl: false
+    database: POSTGRESQL
+    show-sql: true
     hibernate:
       ddl-auto: none

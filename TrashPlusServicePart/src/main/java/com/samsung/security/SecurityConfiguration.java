@@ -24,4 +24,9 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
                 .and().httpBasic(Customizer.withDefaults()).build();
     }
+
+    @Bean
+    public void creatingDataBase() {
+
+    }
 }
