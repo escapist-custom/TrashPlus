@@ -9,6 +9,10 @@ public class TrashPlusContract {
 
     public static class TrashEntry implements BaseColumns {
         public static final String TABLE_NAME = "user";
+
+        public static final String DATABASE_NAME = "AndroidTrashPlus.db";
+
+        public static final int DATABASE_VERSION = 1;
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NICK_NAME = "nick_name";
         public static final String COLUMN_ADDRESS = "address";

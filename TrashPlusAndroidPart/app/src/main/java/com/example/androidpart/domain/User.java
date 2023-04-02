@@ -2,16 +2,19 @@ package com.example.androidpart.domain;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Fts4;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.example.androidpart.repository.TrashPlusContract;
 
 //TODO: update class for date base
 
-@Entity
+@Entity(indices = {@Index(value = "email", unique = true)})
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private long uid;
 
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_NICK_NAME)
@@ -20,6 +23,7 @@ public class User {
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_ADDRESS)
     private String address;
 
+    //TODO: update it for working with Data class
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_BIRTH_DATE)
     private String birthDate;
 
@@ -35,6 +39,34 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
         this.password = password;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getUid() {
+        return uid;
     }
 
     public String getNickName() {

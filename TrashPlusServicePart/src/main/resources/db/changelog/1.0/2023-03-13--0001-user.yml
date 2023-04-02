@@ -27,7 +27,6 @@ databaseChangeLog:
               type: varchar(200)
               constraints:
                 nullable: false
-          # TODO: birth_date with DATE type
           - column:
               name: birth_date
               type: varchar(200)
