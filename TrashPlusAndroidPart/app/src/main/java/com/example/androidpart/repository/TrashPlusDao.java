@@ -22,7 +22,7 @@ public interface TrashPlusDao {
     @Query("SELECT * FROM user WHERE email = :email")
     User findByEmail(String email);
 
-    @Query("SELECT * FROM user WHERE id = 1")
+    @Query("SELECT * FROM user")
     User getUser();
 
     @Insert

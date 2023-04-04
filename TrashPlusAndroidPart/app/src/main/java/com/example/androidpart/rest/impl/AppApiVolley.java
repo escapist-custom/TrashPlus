@@ -1,16 +1,8 @@
 package com.example.androidpart.rest.impl;
 
-import android.app.Activity;
-import android.app.VoiceInteractor;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
 import android.util.Base64;
-import android.util.JsonReader;
 import android.util.Log;
 
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
@@ -22,8 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.androidpart.MainActivity;
-import com.example.androidpart.cache.UserCache;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.fragment.InformationFragment;
 import com.example.androidpart.fragment.LoginFragment;
@@ -31,7 +21,6 @@ import com.example.androidpart.fragment.RegistrationFragment;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.TrashPlusContract;
 import com.example.androidpart.repository.TrashPlusDao;
-import com.example.androidpart.repository.TrashPlusDbOpenHelper;
 import com.example.androidpart.rest.AppApi;
 import com.example.androidpart.rest.mapper.UserMapper;
 
@@ -40,15 +29,12 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class AppApiVolley implements AppApi {
 
     private static final String BASE_URL = "http://192.168.1.49:8080";
     private Fragment fragment;
-    private TrashPlusDbOpenHelper openHelper;
-
     private Response.ErrorListener errorListener;
 
     private AppDatabase db;
@@ -56,7 +42,6 @@ public class AppApiVolley implements AppApi {
     public AppApiVolley(Fragment fragment) {
         this.fragment = fragment;
         errorListener = new ErrorListenerImpl();
-        openHelper = new TrashPlusDbOpenHelper(fragment.getContext());
         db = Room.databaseBuilder(fragment.requireActivity().getApplicationContext(),
                 AppDatabase.class, TrashPlusContract.TrashEntry.DATABASE_NAME).build();
     }
@@ -76,17 +61,12 @@ public class AppApiVolley implements AppApi {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    User user = new User(
-                            response.getString("nickName"),
-                            response.getString("address"),
-                            response.getString("birthDate"),
-                            email,
-                            password
-                    );
+                    User user = UserMapper.getFromJson(response, password);
 
-                    // UserCache.setCurrent_user(UserMapper.getFromJson(response, password));
+                    Log.i("USER", user.toString());
 
                     dao.insert(user);
+                    dao.findByEmail(user.getEmail());
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -186,9 +166,12 @@ public class AppApiVolley implements AppApi {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                String credentials = dao.getUser().getEmail() + ":" + dao.getUser().getPassword();
+                String credentials = null;
+                if (dao.getUser() == null) ((LoginFragment) fragment).makeToastBadCredentials();
+                else credentials = dao.getUser().getEmail() + ":" + dao.getUser().getPassword();
 
                 headers.put("Content-Type", "application/json");
+                assert credentials != null;
                 headers.put("Authorization", "Basic " +
                         Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP));
                 return headers;

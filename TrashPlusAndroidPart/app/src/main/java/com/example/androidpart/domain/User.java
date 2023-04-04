@@ -15,7 +15,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private long uid;
+    private long id;
 
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_NICK_NAME)
     private String nickName;
@@ -41,8 +41,20 @@ public class User {
         this.password = password;
     }
 
-    public void setUid(long uid) {
-        this.uid = uid;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", address='" + address + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setNickName(String nickName) {
@@ -65,8 +77,8 @@ public class User {
         this.password = password;
     }
 
-    public long getUid() {
-        return uid;
+    public long getId() {
+        return id;
     }
 
     public String getNickName() {

@@ -8,7 +8,8 @@ import org.json.JSONObject;
 public class UserMapper {
 
     public static User getFromJson(JSONObject jsonObject, String password) throws JSONException {
-        return new User(jsonObject.getString("nickName"),
+        return new User(
+                jsonObject.getString("nickName"),
                 jsonObject.getString("address"),
                 jsonObject.getString("birthDate"),
                 jsonObject.getString("email"),

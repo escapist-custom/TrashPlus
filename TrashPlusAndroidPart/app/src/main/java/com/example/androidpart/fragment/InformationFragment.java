@@ -11,13 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.androidpart.R;
-import com.example.androidpart.cache.UserCache;
 import com.example.androidpart.domain.User;
+import com.example.androidpart.repository.AppDatabase;
+import com.example.androidpart.repository.TrashPlusDao;
 import com.example.androidpart.rest.impl.AppApiVolley;
 
 import org.json.JSONException;
 
 public class InformationFragment extends Fragment {
+    private AppDatabase db;
+
+    TrashPlusDao dao = db.trashPlusDao();
 
     private TextView tv_userInfo;
     private TextView tv_nickName;
@@ -39,11 +43,11 @@ public class InformationFragment extends Fragment {
         tv_email = view.findViewById(R.id.tv_info_user_email);
         tv_password = view.findViewById(R.id.tv_info_user_password);
         //----------------
-        tv_nickName.setText("Hello, " + UserCache.getCurrentUser().getNickName() + "!");
-        tv_address.setText("Address: " + UserCache.getCurrentUser().getAddress());
-        tv_birthDate.setText("Birth date: " + UserCache.getCurrentUser().getBirthDate());
-        tv_email.setText("Email: " + UserCache.getCurrentUser().getEmail());
-        tv_password.setText("Password: " + UserCache.getCurrentUser().getPassword());
+        tv_nickName.setText("Hello, " + dao.getUser().getNickName() + "!");
+        tv_address.setText("Address: " + dao.getUser().getAddress());
+        tv_birthDate.setText("Birth date: " + dao.getUser().getBirthDate());
+        tv_email.setText("Email: " + dao.getUser().getEmail());
+        tv_password.setText("Password: " + dao.getUser().getPassword());
         return view;
     }
 
