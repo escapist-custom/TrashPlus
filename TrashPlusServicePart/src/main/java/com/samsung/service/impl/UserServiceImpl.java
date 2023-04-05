@@ -6,7 +6,6 @@ import com.samsung.exception.UserNotFoundException;
 import com.samsung.repository.UserRepository;
 import com.samsung.service.UserService;
 import lombok.RequiredArgsConstructor;
-// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (userRepository.findByEmail(user.getEmail()).isPresent())
-            throw new UserAlreadyExistsException("user with email " + user.getEmail() + "already exists");
+            throw new UserAlreadyExistsException("user with email " + user.getEmail() + " already exists");
         return userRepository.save(user);
     }
 
