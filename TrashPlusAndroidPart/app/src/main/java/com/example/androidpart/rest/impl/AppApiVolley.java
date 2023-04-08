@@ -1,10 +1,18 @@
 package com.example.androidpart.rest.impl;
 
+import android.annotation.SuppressLint;
+import android.provider.ContactsContract;
 import android.util.Base64;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.room.Room;
+import androidx.work.Data;
+import androidx.work.ListenableWorker;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,6 +31,7 @@ import com.example.androidpart.repository.TrashPlusContract;
 import com.example.androidpart.repository.TrashPlusDao;
 import com.example.androidpart.rest.AppApi;
 import com.example.androidpart.rest.mapper.UserMapper;
+import com.example.androidpart.thread.MyWorker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,9 +74,19 @@ public class AppApiVolley implements AppApi {
 
                     Log.i("USER", user.toString());
 
-                    dao.insert(user);
-                    dao.findByEmail(user.getEmail());
+                    @SuppressLint("RestrictedApi") Data data = new Data.Builder()
+                            .putString("Nickname", user.getNickName())
+                            .putString("Address", user.getAddress())
+                            .putString("BirthDate", user.getBirthDate())
+                            .putString("Email", user.getEmail())
+                            .putString("Password", user.getPassword())
+                            .build();
 
+                    OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
+                            .setInputData(data)
+                            .build();
+
+                    WorkManager.getInstance(fragment.requireContext()).enqueue(work);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

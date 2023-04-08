@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.androidpart.repository.TrashPlusContract;
 
-//TODO: update class for date base
+//TODO: update class for date
 
 @Entity(indices = {@Index(value = "email", unique = true)})
 public class User {
