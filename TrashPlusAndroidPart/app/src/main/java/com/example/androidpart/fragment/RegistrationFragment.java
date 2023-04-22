@@ -21,7 +21,6 @@ public class RegistrationFragment extends Fragment {
 
     private EditText et_nickName;
     private EditText et_address;
-    private EditText et_birthDate;
     private EditText et_email;
     private EditText et_password;
 
@@ -32,7 +31,6 @@ public class RegistrationFragment extends Fragment {
         View view = inflater.inflate(R.layout.registration_fragment, container, false);
         et_nickName = view.findViewById(R.id.et_registration_nick_name);
         et_address = view.findViewById(R.id.et_registration_address);
-        et_birthDate = view.findViewById(R.id.et_registration_birth_date);
         et_email = view.findViewById(R.id.et_registration_email);
         et_password = view.findViewById(R.id.et_registration_password);
         AppCompatButton bt_signUp = view.findViewById(R.id.bt_registration_sign_up);
@@ -41,7 +39,7 @@ public class RegistrationFragment extends Fragment {
             public void onClick(View view) {
                 new AppApiVolley(RegistrationFragment.this).insert(
                         new User(et_nickName.getText().toString(), et_address.getText().toString(),
-                                et_birthDate.getText().toString(), et_email.getText().toString(),
+                                et_email.getText().toString(),
                                 et_password.getText().toString()));
             }
         });

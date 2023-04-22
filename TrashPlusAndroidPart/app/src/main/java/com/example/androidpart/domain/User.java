@@ -8,9 +8,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.androidpart.repository.TrashPlusContract;
 
-//TODO: update class for date
-
-@Entity(indices = {@Index(value = "email", unique = true)})
+@Entity(tableName = "users", indices = {@Index(value = "email", unique = true)})
 public class User {
 
     @PrimaryKey(autoGenerate = true)
@@ -23,20 +21,15 @@ public class User {
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_ADDRESS)
     private String address;
 
-    //TODO: update it for working with Data class
-    @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_BIRTH_DATE)
-    private String birthDate;
-
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_EMAIL)
     private String email;
 
     @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_PASSWORD)
     private String password;
 
-    public User(String nickName, String address, String birthDate, String email, String password) {
+    public User(String nickName, String address, String email, String password) {
         this.nickName = nickName;
         this.address = address;
-        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
     }
@@ -47,7 +40,6 @@ public class User {
                 "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 ", address='" + address + '\'' +
-                ", birthDate='" + birthDate + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -63,10 +55,6 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 
     public void setEmail(String email) {
@@ -87,10 +75,6 @@ public class User {
 
     public String getAddress() {
         return address;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
     }
 
     public String getEmail() {

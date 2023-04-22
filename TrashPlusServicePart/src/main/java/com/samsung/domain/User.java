@@ -28,10 +28,6 @@ public class User {
     @Column(name = "address")
     private String address;
 
-    // TODO: improve system with Date class
-    @Column(name = "birth_date")
-    private String birthDate;
-
     @Column(name = "email", unique = true)
     private String email;
 
@@ -41,7 +37,6 @@ public class User {
     public User(String nickName, String address, String birthDate, String email, String password) {
         this.nickName = nickName;
         this.address = address;
-        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
     }

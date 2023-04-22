@@ -11,7 +11,6 @@ public class UserMapper {
         return new User(
                 jsonObject.getString("nickName"),
                 jsonObject.getString("address"),
-                jsonObject.getString("birthDate"),
                 jsonObject.getString("email"),
                 password);
     }

@@ -1,10 +1,7 @@
 package com.example.androidpart.repository;
 
-import static android.graphics.Region.Op.REPLACE;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
-import androidx.room.Entity;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -14,15 +11,15 @@ import com.example.androidpart.domain.User;
 import java.util.List;
 
 @Dao
-public interface TrashPlusDao {
+public interface UserTrashPlusDao {
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM users")
     List<User> getAll();
 
-    @Query("SELECT * FROM user WHERE email = :email")
+    @Query("SELECT * FROM users WHERE email = :email")
     User findByEmail(String email);
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM users")
     User getUser();
 
     @Insert

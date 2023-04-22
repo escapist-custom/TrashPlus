@@ -9,28 +9,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.room.Room;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import com.example.androidpart.R;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
-import com.example.androidpart.repository.TrashPlusDao;
+import com.example.androidpart.repository.TrashPlusContract;
 import com.example.androidpart.rest.impl.AppApiVolley;
-
-import org.json.JSONException;
+import com.example.androidpart.thread.FindBy;
 
 public class InformationFragment extends Fragment {
     private AppDatabase db;
 
-    TrashPlusDao dao = db.trashPlusDao();
 
     private TextView tv_userInfo;
     private TextView tv_nickName;
     private TextView tv_address;
-    private TextView tv_birthDate;
     private TextView tv_email;
     private TextView tv_password;
+    private User user;
 
-    // TODO: transfer to SQLite database
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,16 +41,43 @@ public class InformationFragment extends Fragment {
         new AppApiVolley(this).getUserInfo();
         tv_userInfo = view.findViewById(R.id.tv_info_user_info);
         tv_nickName = view.findViewById(R.id.tv_info_user_nickname);
-        tv_address = view.findViewById(R.id.tv_info_user_address);
-        tv_birthDate = view.findViewById(R.id.tv_info_user_birthDate);
         tv_email = view.findViewById(R.id.tv_info_user_email);
         tv_password = view.findViewById(R.id.tv_info_user_password);
-        //----------------
-        tv_nickName.setText("Hello, " + dao.getUser().getNickName() + "!");
-        tv_address.setText("Address: " + dao.getUser().getAddress());
-        tv_birthDate.setText("Birth date: " + dao.getUser().getBirthDate());
-        tv_email.setText("Email: " + dao.getUser().getEmail());
-        tv_password.setText("Password: " + dao.getUser().getPassword());
+
+        db = Room.databaseBuilder(this.getContext(),
+                AppDatabase.class, TrashPlusContract.TrashEntry.DATABASE_NAME).build();
+
+        Data data = new Data.Builder()
+                .putString("Email", user.getEmail())
+                .build();
+
+        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(FindBy.class)
+                .setInputData(data)
+                .build();
+
+        WorkManager.getInstance(this.getContext()).enqueue(work);
+
+        WorkManager.getInstance(this.getContext()).getWorkInfoByIdLiveData(work.getId())
+                .observe(getViewLifecycleOwner(), new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo workInfo) {
+                        if (workInfo != null) {
+                            user = new User(
+                                    workInfo.getOutputData().getString("Nickname"),
+                                    workInfo.getOutputData().getString("Address"),
+                                    workInfo.getOutputData().getString("Email"),
+                                    workInfo.getOutputData().getString("Password")
+                            );
+                        }
+                    }
+                });
+
+        //------------------------------------------------------------------
+        tv_nickName.setText("Hello, " + user.getNickName() + "!");
+        tv_address.setText("Address: " + user.getAddress());
+        tv_birthDate.setText("Birth date: " + user.getBirthDate());
+        tv_email.setText("Email: " + user.getEmail());
+        tv_password.setText("Password: " + user.getPassword());
         return view;
     }
 

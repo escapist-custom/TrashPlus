@@ -1,17 +1,10 @@
 package com.example.androidpart.rest.impl;
 
-import android.annotation.SuppressLint;
-import android.provider.ContactsContract;
 import android.util.Base64;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.room.Room;
-import androidx.work.Data;
-import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import com.android.volley.AuthFailureError;
@@ -27,17 +20,22 @@ import com.example.androidpart.fragment.InformationFragment;
 import com.example.androidpart.fragment.LoginFragment;
 import com.example.androidpart.fragment.RegistrationFragment;
 import com.example.androidpart.repository.AppDatabase;
-import com.example.androidpart.repository.TrashPlusContract;
-import com.example.androidpart.repository.TrashPlusDao;
+import com.example.androidpart.repository.UserTrashPlusDao;
 import com.example.androidpart.rest.AppApi;
 import com.example.androidpart.rest.mapper.UserMapper;
-import com.example.androidpart.thread.MyWorker;
+import com.example.androidpart.runnable.InsertRunnable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class AppApiVolley implements AppApi {
@@ -45,20 +43,18 @@ public class AppApiVolley implements AppApi {
     private static final String BASE_URL = "http://192.168.1.49:8080";
     private Fragment fragment;
     private Response.ErrorListener errorListener;
-
-    private AppDatabase db;
+    private ExecutorService service;
+    private final AppDatabase db;
 
     public AppApiVolley(Fragment fragment) {
         this.fragment = fragment;
         errorListener = new ErrorListenerImpl();
-        db = Room.databaseBuilder(fragment.requireActivity().getApplicationContext(),
-                AppDatabase.class, TrashPlusContract.TrashEntry.DATABASE_NAME).build();
+        db = AppDatabase.getInstance(fragment.getContext());
     }
-
     @Override
     public void findUserByEmail(String email, String password) {
 
-        TrashPlusDao dao = db.trashPlusDao();
+        service = Executors.newSingleThreadExecutor();
 
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user/" + email;
@@ -74,19 +70,8 @@ public class AppApiVolley implements AppApi {
 
                     Log.i("USER", user.toString());
 
-                    @SuppressLint("RestrictedApi") Data data = new Data.Builder()
-                            .putString("Nickname", user.getNickName())
-                            .putString("Address", user.getAddress())
-                            .putString("BirthDate", user.getBirthDate())
-                            .putString("Email", user.getEmail())
-                            .putString("Password", user.getPassword())
-                            .build();
+                    if (user != null) service.execute(new InsertRunnable(user, fragment.getContext(), db));
 
-                    OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
-                            .setInputData(data)
-                            .build();
-
-                    WorkManager.getInstance(fragment.requireContext()).enqueue(work);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -118,16 +103,12 @@ public class AppApiVolley implements AppApi {
 
     @Override
     public void insert(User user) {
-
-        TrashPlusDao dao = db.trashPlusDao();
-
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user";
         JSONObject params = new JSONObject();
         try {
             params.put("nickName", user.getNickName());
             params.put("address", user.getAddress());
-            params.put("birthDate", user.getBirthDate());
             params.put("email", user.getEmail());
             params.put("password", user.getPassword());
         } catch (JSONException e) {
@@ -160,7 +141,7 @@ public class AppApiVolley implements AppApi {
     @Override
     public void getUserInfo() {
 
-        TrashPlusDao dao = db.trashPlusDao();
+        UserTrashPlusDao dao = db.trashPlusDao();
 
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/information/user";

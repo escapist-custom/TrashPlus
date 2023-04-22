@@ -1,8 +1,9 @@
 package com.example.androidpart.repository;
 
-import androidx.room.AutoMigration;
+import android.content.Context;
+
 import androidx.room.Database;
-import androidx.room.RenameColumn;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.androidpart.domain.User;
@@ -11,6 +12,20 @@ import com.example.androidpart.domain.User;
         version = TrashPlusContract.TrashEntry.DATABASE_VERSION)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract TrashPlusDao trashPlusDao();
+    private static volatile AppDatabase INSTANCE;
 
+    public abstract UserTrashPlusDao trashPlusDao();
+
+    public static AppDatabase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, TrashPlusContract.TrashEntry.DATABASE_NAME)
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 }

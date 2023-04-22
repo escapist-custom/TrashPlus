@@ -16,7 +16,6 @@ public class TrashPlusContract {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NICK_NAME = "nick_name";
         public static final String COLUMN_ADDRESS = "address";
-        public static final String COLUMN_BIRTH_DATE = "birth_date";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PASSWORD = "password";
 
@@ -28,7 +27,6 @@ public class TrashPlusContract {
                         TrashPlusContract.TrashEntry.COLUMN_ID + " INTEGER PRIMARY KEY, " +
                         TrashPlusContract.TrashEntry.COLUMN_NICK_NAME + " TEXT NOT NULL, " +
                         TrashPlusContract.TrashEntry.COLUMN_ADDRESS + " TEXT NOT NULL, " +
-                        TrashPlusContract.TrashEntry.COLUMN_BIRTH_DATE + " DATE NOT NULL, " +
                         TrashPlusContract.TrashEntry.COLUMN_EMAIL + " TEXT NOT NULL, " +
                         TrashPlusContract.TrashEntry.COLUMN_PASSWORD + " TEXT NOT NULL);";
 
