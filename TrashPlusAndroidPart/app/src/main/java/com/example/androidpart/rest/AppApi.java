@@ -8,6 +8,4 @@ public interface AppApi {
 
     void insert(User user);
 
-    void getUserInfo();
-
 }

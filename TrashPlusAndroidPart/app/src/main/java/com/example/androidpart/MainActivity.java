@@ -10,11 +10,13 @@ import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.TrashPlusContract;
 
 public class MainActivity extends AppCompatActivity {
-    public AppDatabase db;
+    public static AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                TrashPlusContract.TrashEntry.DATABASE_NAME).build();
     }
 }

@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.androidpart.domain.User;
+import com.example.androidpart.repository.dao.UserTrashPlusDao;
 
 @Database(entities = {User.class},
         version = TrashPlusContract.TrashEntry.DATABASE_VERSION)

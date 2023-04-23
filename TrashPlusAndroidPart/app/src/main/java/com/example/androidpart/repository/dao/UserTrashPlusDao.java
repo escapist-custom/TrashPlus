@@ -1,8 +1,9 @@
-package com.example.androidpart.repository;
+package com.example.androidpart.repository.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -22,7 +23,7 @@ public interface UserTrashPlusDao {
     @Query("SELECT * FROM users")
     User getUser();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);
 
     @Delete
@@ -30,5 +31,8 @@ public interface UserTrashPlusDao {
 
     @Update
     void update(User user);
+
+    @Query("DELETE FROM users")
+    void deleteAll();
 
 }
