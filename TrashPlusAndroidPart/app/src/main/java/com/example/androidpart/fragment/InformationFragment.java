@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.androidpart.MainActivity;
 import com.example.androidpart.R;
+import com.example.androidpart.databinding.InformationFragmentBinding;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.dao.UserTrashPlusDao;
@@ -30,19 +31,14 @@ public class InformationFragment extends Fragment {
     private TextView tv_address;
     private TextView tv_email;
     private TextView tv_password;
-    private User user;
-    private UserTrashPlusDao userDao;
     private Handler handler = new Handler();
+    private InformationFragmentBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.information_fragment, container, false);
-        tv_userInfo = view.findViewById(R.id.tv_info_user_info);
-        tv_address = view.findViewById(R.id.tv_info_address);
-        tv_nickName = view.findViewById(R.id.tv_info_user_nickname);
-        tv_email = view.findViewById(R.id.tv_info_user_email);
-        tv_password = view.findViewById(R.id.tv_info_user_password);
+        binding = InformationFragmentBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
 
         ExecutorService service = Executors.newSingleThreadExecutor();
 
@@ -51,6 +47,7 @@ public class InformationFragment extends Fragment {
 
         return view;
     }
+
     public void setTv_userInfo(TextView tv_userInfo) {
         this.tv_userInfo = tv_userInfo;
     }
@@ -76,9 +73,11 @@ public class InformationFragment extends Fragment {
         private final UserTrashPlusDao userDao;
 
         Handler userHandler;
+
         public GetUserRunnable(AppDatabase database) {
             userDao = database.trashPlusDao();
         }
+
         @Override
         public void run() {
             userOutput = userDao.getUser();
@@ -87,12 +86,18 @@ public class InformationFragment extends Fragment {
             userHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    tv_nickName.setText("Hello, " + userOutput.getNickName() + "!");
-                    tv_address.setText("Address: " + userOutput.getAddress());
-                    tv_email.setText("Email: " + userOutput.getEmail());
-                    tv_password.setText("Password: " + userOutput.getPassword());
+                    binding.tvInfoUserNickname.setText("Hello, " + userOutput.getNickName() + "!");
+                    binding.tvInfoAddress.setText("Address: " + userOutput.getAddress());
+                    binding.tvInfoUserEmail.setText("Email: " + userOutput.getEmail());
+                    binding.tvInfoUserPassword.setText("Password: " + userOutput.getPassword());
                 }
             });
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

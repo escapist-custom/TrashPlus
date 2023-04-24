@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidpart.MainActivity;
 import com.example.androidpart.R;
+import com.example.androidpart.databinding.RegistrationFragmentBinding;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.rest.impl.AppApiVolley;
 import com.example.androidpart.runnable.InsertRunnable;
@@ -29,24 +30,23 @@ public class RegistrationFragment extends Fragment {
     private EditText et_email;
     private EditText et_password;
     private ExecutorService service;
+    private RegistrationFragmentBinding binding;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.registration_fragment, container, false);
-        et_nickName = view.findViewById(R.id.et_registration_nick_name);
-        et_address = view.findViewById(R.id.et_registration_address);
-        et_email = view.findViewById(R.id.et_registration_email);
-        et_password = view.findViewById(R.id.et_registration_password);
-        AppCompatButton bt_signUp = view.findViewById(R.id.bt_registration_sign_up);
+        binding = RegistrationFragmentBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         service = Executors.newSingleThreadExecutor();
-        bt_signUp.setOnClickListener(new View.OnClickListener() {
+        binding.btRegistrationSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = new User(et_nickName.getText().toString(), et_address.getText().toString(),
-                        et_email.getText().toString(),
-                        et_password.getText().toString());
+                User user = new User(
+                        binding.etRegistrationNickName.getText().toString(),
+                        binding.etRegistrationAddress.getText().toString(),
+                        binding.etRegistrationEmail.getText().toString(),
+                        binding.etRegistrationPassword.getText().toString());
                 service.execute(new InsertRunnable(user, MainActivity.db));
                 new AppApiVolley(RegistrationFragment.this).insert(user);
             }
@@ -59,5 +59,11 @@ public class RegistrationFragment extends Fragment {
     }
     public void makeToastFailedRegistration(){
         Toast.makeText(getContext(), "Error during registration ", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

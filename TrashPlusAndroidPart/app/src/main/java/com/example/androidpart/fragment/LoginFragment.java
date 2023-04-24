@@ -14,29 +14,29 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidpart.R;
+import com.example.androidpart.databinding.LoginFragmentBinding;
 import com.example.androidpart.rest.AppApi;
 import com.example.androidpart.rest.impl.AppApiVolley;
 
 
 public class LoginFragment extends Fragment {
+    private LoginFragmentBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_fragment, container, false);
-        AppCompatButton bt_login = view.findViewById(R.id.bt_login_sign_in);
-        AppCompatButton bt_registration = view.findViewById(R.id.bt_login_sign_up);
-        EditText et_email = view.findViewById(R.id.et_login_email);
-        EditText et_password = view.findViewById(R.id.et_login_password);
-        bt_login.setOnClickListener(new View.OnClickListener() {
+        binding = LoginFragmentBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        binding.btLoginSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppApi volley = new AppApiVolley(LoginFragment.this);
-                volley.findUserByEmail(et_email.getText().toString(),
-                        et_password.getText().toString());
+                volley.findUserByEmail(binding.etLoginEmail.getText().toString(),
+                        binding.etLoginPassword.getText().toString());
             }
         });
-        bt_registration.setOnClickListener(new View.OnClickListener() {
+        binding.btLoginSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this)
@@ -51,5 +51,11 @@ public class LoginFragment extends Fragment {
     }
     public void makeToastBadCredentials(){
         Toast.makeText(getContext(), "Error in login or password", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
