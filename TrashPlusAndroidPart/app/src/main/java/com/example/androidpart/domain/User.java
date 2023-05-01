@@ -2,11 +2,10 @@ package com.example.androidpart.domain;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.example.androidpart.repository.TrashPlusContract;
+import com.example.androidpart.repository.user.TrashPlusContractUser;
 
 @Entity(tableName = "users", indices = {@Index(value = "email", unique = true)})
 public class User {
@@ -15,16 +14,16 @@ public class User {
     @ColumnInfo(name = "id")
     private long id;
 
-    @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_NICK_NAME)
+    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_NICK_NAME)
     private String nickName;
 
-    @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_ADDRESS)
+    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_ADDRESS)
     private String address;
 
-    @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_EMAIL)
+    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_EMAIL)
     private String email;
 
-    @ColumnInfo(name = TrashPlusContract.TrashEntry.COLUMN_PASSWORD)
+    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_PASSWORD)
     private String password;
 
     public User(String nickName, String address, String email, String password) {

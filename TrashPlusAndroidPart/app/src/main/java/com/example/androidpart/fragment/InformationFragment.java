@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,14 +13,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.androidpart.MainActivity;
 import com.example.androidpart.R;
 import com.example.androidpart.databinding.InformationFragmentBinding;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
-import com.example.androidpart.repository.dao.UserTrashPlusDao;
-import com.example.androidpart.runnable.InsertRunnable;
+import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,6 +46,24 @@ public class InformationFragment extends Fragment {
 
         GetUserRunnable userRunnable = new GetUserRunnable(MainActivity.db);
         service.execute(userRunnable);
+
+        binding.navBar.getMenu().findItem(R.id.person).setChecked(true);
+
+        binding.navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId()) {
+                    case(R.id.scanner):
+                        /*getActivity().getSupportFragmentManager().beginTransaction()
+                                .remove(InformationFragment.this).commit();*/
+                        NavHostFragment.findNavController(InformationFragment.this).navigate(R.id.action_informationFragment_to_scanningFragment);
+
+                }
+
+                return false;
+            }
+        });
 
         return view;
     }
@@ -86,10 +106,8 @@ public class InformationFragment extends Fragment {
             userHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    binding.tvInfoUserNickname.setText("Hello, " + userOutput.getNickName() + "!");
-                    binding.tvInfoAddress.setText("Address: " + userOutput.getAddress());
-                    binding.tvInfoUserEmail.setText("Email: " + userOutput.getEmail());
-                    binding.tvInfoUserPassword.setText("Password: " + userOutput.getPassword());
+                    binding.userName.setText(userOutput.getNickName());
+                    binding.userEmail.setText(userOutput.getEmail());
                 }
             });
         }

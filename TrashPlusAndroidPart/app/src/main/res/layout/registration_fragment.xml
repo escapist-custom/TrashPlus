@@ -7,15 +7,39 @@
     android:background="@color/background_white"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_registration_head"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
     <View
-        android:id="@+id/view2"
+        android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/background"
-        app:layout_constraintDimensionRatio="1:1.1"
+        android:background="@drawable/ellipse_for_login_and_registration"
+        app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/pre_logo_white"
+        app:layout_constraintEnd_toEndOf="@id/dl_registration_right"
+        app:layout_constraintStart_toStartOf="@id/dl_registration_left"
+        app:layout_constraintTop_toTopOf="@+id/dl_registration_head" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dl_registration_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/dl_registration_left"
@@ -32,57 +56,59 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <TextView
-        android:id="@+id/tv_registration_hello"
+        android:id="@+id/tv_registration_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registration"
-        android:textColor="@color/black"
-        android:textSize="36sp"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintBottom_toBottomOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="@id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
         android:id="@+id/tv_registration_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_new_account"
-        android:textColor="@color/hint_color"
-        android:textSize="16sp"
+        android:text="@string/sign_up"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_registration_hello"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toBottomOf="@+id/dl_registration_top"
+        app:layout_constraintVertical_bias="0.07" />
 
     <EditText
         android:id="@+id/et_registration_nick_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_form"
-        android:hint="@string/name"
+        android:background="@drawable/rectangle_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/enter_name"
         android:padding="7dp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint_color"
-        android:textSize="20sp"
-        android:gravity="center_vertical"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
         app:layout_constraintTop_toBottomOf="@id/tv_registration_description"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <EditText
         android:id="@+id/et_registration_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_form"
-        android:hint="@string/address"
+        android:background="@drawable/rectangle_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/enter_address"
         android:padding="7dp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint_color"
-        android:textSize="20sp"
-        android:gravity="center_vertical"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
@@ -93,13 +119,13 @@
         android:id="@+id/et_registration_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_form"
-        android:hint="@string/email"
+        android:background="@drawable/rectangle_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/enter_email"
         android:padding="7dp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint_color"
-        android:textSize="20sp"
-        android:gravity="center_vertical"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
@@ -110,13 +136,13 @@
         android:id="@+id/et_registration_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_form"
-        android:hint="@string/password"
+        android:background="@drawable/rectangle_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/enter_password"
         android:padding="7dp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint_color"
-        android:textSize="20sp"
-        android:gravity="center_vertical"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
@@ -127,16 +153,30 @@
         android:id="@+id/bt_registration_sign_up"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/purple_button"
+        android:background="@drawable/button"
+        android:gravity="center"
         android:text="@string/sign_up"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:textSize="24sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
         app:layout_constraintTop_toBottomOf="@+id/et_registration_password"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.4" />
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemRippleColor="@null"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.androidpart.domain.User;
-import com.example.androidpart.repository.dao.UserTrashPlusDao;
+import com.example.androidpart.repository.user.TrashPlusContractUser;
+import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
 @Database(entities = {User.class},
-        version = TrashPlusContract.TrashEntry.DATABASE_VERSION)
+        version = TrashPlusContractUser.TrashEntry.DATABASE_VERSION)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
@@ -22,7 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, TrashPlusContract.TrashEntry.DATABASE_NAME)
+                            AppDatabase.class, TrashPlusContractUser.TrashEntry.DATABASE_NAME)
                             .build();
                 }
             }

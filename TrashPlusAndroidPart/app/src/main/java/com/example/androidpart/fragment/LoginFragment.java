@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment {
                         binding.etLoginPassword.getText().toString());
             }
         });
-        binding.btLoginSignUp.setOnClickListener(new View.OnClickListener() {
+        binding.btnSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this)

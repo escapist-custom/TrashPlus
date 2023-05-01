@@ -1,4 +1,4 @@
-package com.example.androidpart.repository.dao;
+package com.example.androidpart.repository.user.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

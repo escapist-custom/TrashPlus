@@ -2,7 +2,7 @@ package com.example.androidpart.runnable;
 
 import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
-import com.example.androidpart.repository.dao.UserTrashPlusDao;
+import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
 public class InsertRunnable implements Runnable {
     private final User inputUser;

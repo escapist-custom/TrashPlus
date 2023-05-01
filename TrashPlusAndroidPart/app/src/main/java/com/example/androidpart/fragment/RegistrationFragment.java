@@ -19,16 +19,12 @@ import com.example.androidpart.databinding.RegistrationFragmentBinding;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.rest.impl.AppApiVolley;
 import com.example.androidpart.runnable.InsertRunnable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class RegistrationFragment extends Fragment {
-
-    private EditText et_nickName;
-    private EditText et_address;
-    private EditText et_email;
-    private EditText et_password;
     private ExecutorService service;
     private RegistrationFragmentBinding binding;
 

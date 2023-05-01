@@ -9,7 +9,11 @@
         android:id="@+id/informationFragment"
         android:name="com.example.androidpart.fragment.InformationFragment"
         android:label="InformationFragment"
-        tools:layout="@layout/information_fragment" />
+        tools:layout="@layout/information_fragment" >
+        <action
+            android:id="@+id/action_informationFragment_to_scanningFragment"
+            app:destination="@id/scanningFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.androidpart.fragment.LoginFragment"
@@ -37,4 +41,13 @@
         android:name="com.example.androidpart.MainActivity"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/scanningFragment"
+        tools:layout="@layout/scanning_fragment"
+        android:name="com.example.androidpart.fragment.ScanningFragment"
+        android:label="ScanningFragment" >
+        <action
+            android:id="@+id/action_scanningFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
 </navigation>
