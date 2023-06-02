@@ -9,13 +9,8 @@ import androidx.room.Update;
 
 import com.example.androidpart.domain.User;
 
-import java.util.List;
-
 @Dao
 public interface UserTrashPlusDao {
-
-    @Query("SELECT * FROM users")
-    List<User> getAll();
 
     @Query("SELECT * FROM users WHERE email = :email")
     User findByEmail(String email);

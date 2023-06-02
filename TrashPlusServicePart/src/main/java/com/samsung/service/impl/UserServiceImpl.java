@@ -1,19 +1,26 @@
 package com.samsung.service.impl;
 
+import com.samsung.domain.Product;
 import com.samsung.domain.User;
 import com.samsung.exception.UserAlreadyExistsException;
 import com.samsung.exception.UserNotFoundException;
+import com.samsung.repository.LinkRepository;
 import com.samsung.repository.UserRepository;
+import com.samsung.rest.dto.ProductDto;
 import com.samsung.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final LinkRepository linkRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -29,6 +36,34 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(
-                "user  with email " + email + " was not found"));
+                "user with email " + email + " was not found"));
+    }
+
+    @Override
+    //@Transactional(readOnly = true)
+    public User update(User user) {
+        User newUser = User.builder()
+                .nickName(user.getNickName())
+                .address(user.getAddress())
+                .email(user.getEmail())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .products(user.getProducts())
+                .build();
+        System.out.println(user);
+        newUser.setProducts(user.getProducts());
+        for (int i = 0; i < newUser.getProducts().size(); i++) {
+            linkRepository.addProduct(newUser.getId(), newUser.getProducts().get(i).getId());
+        }
+        return newUser;
+    }
+
+    @Override
+    public List<Product> getScannedProducts(long id) {
+        return userRepository.findByProducts(id);
+    }
+
+    @Override
+    public void deleteByEmail(String email) {
+        userRepository.deleteByEmail(email);
     }
 }

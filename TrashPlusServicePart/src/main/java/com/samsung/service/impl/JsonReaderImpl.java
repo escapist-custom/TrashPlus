@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.URI;
-import java.net.URL;
 import java.nio.charset.Charset;
 
 public class JsonReaderImpl implements JsonReader {
@@ -15,7 +14,4 @@ public class JsonReaderImpl implements JsonReader {
         String json = IOUtils.toString(URI.create(url), Charset.forName("UTF-8"));
         return new JSONObject(json);
     }
-
-
-
 }

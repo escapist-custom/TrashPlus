@@ -143,19 +143,6 @@
         app:layout_constraintStart_toStartOf="@+id/dl_login_left"
         app:layout_constraintTop_toBottomOf="@id/tv_password" />
 
-    <TextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        android:textSize="14sp"
-        android:textColor="@color/hint_color"
-        app:layout_constraintVertical_bias="0.02"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/dl_login_right"
-        app:layout_constraintTop_toBottomOf="@id/et_login_password"
-        />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_login_sign_in"
         android:layout_width="0dp"
@@ -165,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_login_right"
         app:layout_constraintStart_toStartOf="@+id/dl_login_left"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_login_password"
         android:background="@drawable/button"
         android:text="@string/sign_in"
         android:textColor="@color/white"

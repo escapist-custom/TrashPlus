@@ -1,14 +1,14 @@
 package com.samsung.domain;
 
+import com.samsung.repository.ProductRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -19,7 +19,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "nick_name")
@@ -34,10 +34,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User(String nickName, String address, String birthDate, String email, String password) {
-        this.nickName = nickName;
-        this.address = address;
-        this.email = email;
-        this.password = password;
-    }
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    private List<Product> products = new ArrayList<>();
 }

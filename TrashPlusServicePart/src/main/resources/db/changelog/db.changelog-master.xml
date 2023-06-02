@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--Creating the tables-->
+    <include file="db/changelog/1.0/2023-03-13--0001-user.xml"/>
+    <include file="db/changelog/1.0/2023-05-04--0002-product.xml"/>
+    <include file="db/changelog/1.0/2023-05-04--0003-user_product.xml"/>
+
+    <!--Fulling the tables-->
+    <include file="db/changelog/data/2023-03-13--0001-user-data.xml"/>
+    <include file="db/changelog/data/2023-05-04--0002-product-data.xml"/>
+    <include file="db/changelog/data/2023-05-04--0003-user_product-data.xml"/>
+</databaseChangeLog>

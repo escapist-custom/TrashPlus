@@ -7,25 +7,26 @@ import androidx.room.PrimaryKey;
 
 import com.example.androidpart.repository.user.TrashPlusContractUser;
 
+import java.util.List;
+
 @Entity(tableName = "users", indices = {@Index(value = "email", unique = true)})
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_ID)
     private long id;
 
-    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_NICK_NAME)
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_NICK_NAME)
     private String nickName;
 
-    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_ADDRESS)
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_ADDRESS)
     private String address;
 
-    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_EMAIL)
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_EMAIL)
     private String email;
 
-    @ColumnInfo(name = TrashPlusContractUser.TrashEntry.COLUMN_PASSWORD)
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_PASSWORD)
     private String password;
-
     public User(String nickName, String address, String email, String password) {
         this.nickName = nickName;
         this.address = address;
@@ -43,6 +44,7 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 
     public void setId(long id) {
         this.id = id;

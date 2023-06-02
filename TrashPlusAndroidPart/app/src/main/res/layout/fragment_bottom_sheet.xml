@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_info_product"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="80dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:background="@drawable/arrow_back" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_sheet_left"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.06" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_sheet_right"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.94" />
+
+            <ImageView
+                android:id="@+id/iv_product_photo"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:src="@drawable/newzealand"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintEnd_toStartOf="@+id/gl_sheet_right"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:padding="15dp"
+                android:text="@string/product_name"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:minLines="2"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintEnd_toStartOf="@+id/gl_sheet_right"
+                app:layout_constraintTop_toBottomOf="@id/iv_product_photo" />
+
+            <TextView
+                android:id="@+id/info_about_recycling"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/recycling"
+                android:textColor="@color/hint_color"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
+
+            <TextView
+                android:id="@+id/tv_recycling_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:lineSpacingMultiplier="1.3"
+                android:padding="15dp"
+                android:scrollbars="vertical"
+                android:text="@string/info"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/gl_sheet_right"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintTop_toBottomOf="@+id/info_about_recycling" />
+
+            <TextView
+                android:id="@+id/info_about_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/researching_product_hint"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/hint_color"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recycling_info" />
+
+            <TextView
+                android:id="@+id/tv_product_info"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:lineSpacingMultiplier="1.3"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:paddingBottom="14dp"
+                android:scrollbars="vertical"
+                android:text="@string/info"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/gl_sheet_left"
+                app:layout_constraintEnd_toStartOf="@+id/gl_sheet_right"
+                app:layout_constraintTop_toBottomOf="@+id/info_about_product" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</LinearLayout>
