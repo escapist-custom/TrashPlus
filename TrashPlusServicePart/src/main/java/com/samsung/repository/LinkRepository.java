@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/*
+* Этот класс будет использоваться для сохранения продуктов у пользователя*/
 @Repository
 public interface LinkRepository extends JpaRepository<User, Long> {
     @Query(value = "INSERT INTO link (user_id, product_id) VALUES (:userId, :productId)", nativeQuery = true)

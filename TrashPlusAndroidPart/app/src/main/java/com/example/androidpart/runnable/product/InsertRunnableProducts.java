@@ -4,7 +4,6 @@ import com.example.androidpart.domain.Product;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
-import com.example.androidpart.repository.user.dao.UserTrashPlusDao_Impl;
 
 import java.util.List;
 

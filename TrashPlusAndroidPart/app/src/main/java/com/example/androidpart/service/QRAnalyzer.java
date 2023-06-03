@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +23,10 @@ import com.bumptech.glide.Glide;
 import com.example.androidpart.MainActivity;
 import com.example.androidpart.R;
 import com.example.androidpart.domain.Product;
+import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
+import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 import com.example.androidpart.rest.impl.AppApiVolley;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -100,7 +101,6 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
                 barcode = result.getText().split("/")[0];
                 classOfProduct = result.getText().split("/")[1];
             }
-            Log.i("CLASS_PRODUCT", classOfProduct);
             GetProductByBarcode getProductByBarcode = new GetProductByBarcode(MainActivity.db,
                     barcode, result, classOfProduct);
             service.execute(getProductByBarcode);
@@ -151,7 +151,6 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
         infoCovering.setText(settingTexts(classOfProduct));
         nameOfProductSheet.setText(product.getNameOfProduct());
         infoProduct.setText(product.getInformation());
-        Log.i("PRODUCT", product.toString());
         try {
             Glide.with(ivProduct)
                     .load(new URL(product.getPhotoLink()))
@@ -397,6 +396,7 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
     class GetProductByBarcode implements Runnable {
 
         private final ProductTrashPlusDao productDao;
+        private final UserTrashPlusDao userDao;
         private Handler handler;
 
         private Product product;
@@ -406,6 +406,7 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
 
         GetProductByBarcode(AppDatabase db, String barcode, Result result, String coverCode) {
             this.productDao = db.trashPlusDaoProduct();
+            this.userDao = db.trashPlusDaoUser();
             this.barcode = barcode;
             this.result = result;
             this.coverCode = coverCode;
@@ -415,7 +416,6 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
         public void run() {
             if (productDao.getProductByBarcode(barcode) == null) {
                 if (barcode != null) {
-                    Log.i("BARCODE", barcode);
                     if (AppApiVolley.requestFlag) {
                         appApiVolley.getProduct(barcode);
                         AppApiVolley.requestFlag = false;
@@ -423,10 +423,10 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
                 }
             } else {
                 product = productDao.getProductByBarcode(barcode);
+                User user = userDao.getUser();
                 product.setClassOfCover(coverCode);
+                product.setUserId(user.getId());
                 productDao.update(product);
-                Log.i("PRODUCT_UPDATE", productDao.getProductByBarcode(Long.toString(
-                        product.getProductCode())).toString());
                 handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override

@@ -1,7 +1,6 @@
 package com.samsung.service.impl;
 
 import com.samsung.domain.Product;
-import com.samsung.domain.User;
 import com.samsung.repository.ProductRepository;
 import com.samsung.repository.UserRepository;
 import com.samsung.rest.dto.ProductDto;
@@ -25,11 +24,6 @@ public class ProductServiceImpl implements ProductService {
     private static ProductRepository productRepositoryStatic;
     private JsonReaderImpl jsonReader;
     private final String API_URL = "https://rskrf.ru/rest/1/search/barcode?barcode=";
-
-    @Override
-    public Product insert(Product product) {
-        return productRepository.save(product);
-    }
 
     @Override
     public ProductDto findByCode(long code) {

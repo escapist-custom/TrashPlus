@@ -17,7 +17,6 @@ public class ProductController {
 
     @GetMapping("/product/{codeProduct}")
     public ProductDto findByCodeProduct(@PathVariable("codeProduct") long codeProduct) {
-        System.out.println(productService.findByCode(codeProduct).toString());
         return productService.findByCode(codeProduct);
     }
 }

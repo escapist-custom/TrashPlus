@@ -69,10 +69,6 @@ public class Product{
         return photoLink;
     }
 
-    public void setPhotoLink(String photoLink) {
-        this.photoLink = photoLink;
-    }
-
     public long getId() {
         return id;
     }
@@ -85,24 +81,12 @@ public class Product{
         return nameOfProduct;
     }
 
-    public void setNameOfProduct(String nameOfProduct) {
-        this.nameOfProduct = nameOfProduct;
-    }
-
     public long getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(long productCode) {
-        this.productCode = productCode;
-    }
-
     public String getInformation() {
         return information;
-    }
-
-    public void setInformation(String information) {
-        this.information = information;
     }
 
     @Override

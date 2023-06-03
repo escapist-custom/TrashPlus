@@ -50,10 +50,10 @@ public class UserController {
                 newProducts.add(ProductDto.fromDtoToProduct(productDto));
             }
         }
-        System.out.println(userDto.toString());
         return UserDto.toDto(userService.save(UserDto.fromDto(userDto, newProducts)));
     }
 
+    // This method is for future functionality
     @Transactional
     @PostMapping("/user/{email}")
     public User addProduct(

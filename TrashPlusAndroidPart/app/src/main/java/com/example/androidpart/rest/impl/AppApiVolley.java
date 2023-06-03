@@ -1,6 +1,5 @@
 package com.example.androidpart.rest.impl;
 
-import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -44,14 +43,12 @@ import java.util.concurrent.Executors;
 public class AppApiVolley implements AppApi {
 
     public static final String VOLLEYERROR = "VOLLEYERROR";
-    private static final String BASE_URL = "http://192.168.1.49:8080";
+    private static final String BASE_URL = "http://94.103.92.3:8080";
     public static final String DATA_SAVED = "DATA_SAVED";
-    public static final String PARAMS = "PARAMS";
     private Fragment fragment;
     private InsertRunnableUser insertRunnableUser;
     private InsertRunnableProducts insertRunnableProducts;
     private InsertRunnableProduct insertRunnableProduct;
-    public static boolean responseFlag = true;
     public static boolean requestFlag = true;
 
     public AppApiVolley(Fragment fragment) {
@@ -77,7 +74,6 @@ public class AppApiVolley implements AppApi {
                     JSONArray productsJson = response.getJSONArray("products");
                     List<Product> products = ProductMapper.getArrayFromJson(productsJson);
 
-                    Log.i("USER", user.toString());
 
                     insertRunnableProducts = new InsertRunnableProducts(products, MainActivity.db);
                     insertRunnableUser = new InsertRunnableUser(user, MainActivity.db);
@@ -96,7 +92,6 @@ public class AppApiVolley implements AppApi {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("BadCredentialsAppApi", email);
-                Log.e(VOLLEYERROR, error.toString());
                 if (fragment.getClass().equals(LoginFragment.class)) {
                     ((LoginFragment) fragment).makeToastBadCredentials();
                 }
@@ -168,7 +163,6 @@ public class AppApiVolley implements AppApi {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.i("RESPONSE", response.toString());
                             Product product = ProductMapper.getProductFromJson(response);
                             insertRunnableProduct = new InsertRunnableProduct(MainActivity.db,
                                     product);
@@ -229,8 +223,6 @@ public class AppApiVolley implements AppApi {
                 Map<String, String> params = new HashMap<>();
                 Gson gson = new Gson();
                 String json = gson.toJson(products);
-                Log.i("PRODUCTS_IN_API", json);
-                // Log.i("JSON_OBJECT", jsonObject.toString());
                 params.put("nickName", user.getNickName());
                 params.put("address", user.getAddress());
                 params.put("email", user.getEmail());
@@ -240,12 +232,5 @@ public class AppApiVolley implements AppApi {
             }
         };
         requestQueue.add(stringRequest);
-    }
-
-    private static class ErrorListenerImpl implements Response.ErrorListener {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.e("AppApiErrorResponse", error.getMessage());
-        }
     }
 }

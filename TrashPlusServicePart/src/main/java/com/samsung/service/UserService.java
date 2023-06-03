@@ -2,7 +2,6 @@ package com.samsung.service;
 
 import com.samsung.domain.Product;
 import com.samsung.domain.User;
-import com.samsung.rest.dto.ProductDto;
 
 import java.util.List;
 
@@ -17,5 +16,4 @@ public interface UserService {
 
     void deleteByEmail(String email);
 
-    // void addProduct(String email, Product product);
 }

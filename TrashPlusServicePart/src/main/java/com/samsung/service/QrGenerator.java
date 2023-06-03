@@ -41,10 +41,10 @@ public class QrGenerator {
 	{
 
 		// The data that the QR code will contain
-		String data = "4606791000180/70";
+		String data = "4607035890024/40FE";
 
 		// The path where the image will get saved
-		String path = "Сок апельсиновый восстановленный, с мякотью, Swell.png";
+		String path = "Горошек зеленый консервированный, т.з. «6 Соток».png";
 
 		// Encoding charset
 		String charset = "UTF-8";

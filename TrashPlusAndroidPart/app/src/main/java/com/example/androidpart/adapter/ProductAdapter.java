@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.androidpart.R;
-import com.example.androidpart.databinding.FragmentBottomSheetBinding;
 import com.example.androidpart.domain.Product;
 
 import java.net.MalformedURLException;
@@ -27,14 +26,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Product> products;
-    private FragmentBottomSheetBinding bindingBottomSheet;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.product_item, parent, false);
-        bindingBottomSheet = FragmentBottomSheetBinding.inflate(LayoutInflater.from(parent.getContext()));
         return new ViewHolder(view);
     }
 

@@ -15,7 +15,6 @@ import com.example.androidpart.rest.impl.AppApiVolley;
 import java.util.List;
 
 public class UserUpdateRunnable implements Runnable {
-    public static final String USER_UPDATE = "USER_UPDATE";
     private ProductTrashPlusDao productDao;
     private UserTrashPlusDao userDao;
     private Fragment fragment;
@@ -29,9 +28,7 @@ public class UserUpdateRunnable implements Runnable {
     @Override
     public void run() {
         User user = userDao.getUser();
-        Log.i(USER_UPDATE, user.toString());
         List<Product> products = productDao.getAllProducts(user.getId());
-        Log.i(USER_UPDATE, products.toString());
         new AppApiVolley(fragment).updateUser(user, products);
     }
 }

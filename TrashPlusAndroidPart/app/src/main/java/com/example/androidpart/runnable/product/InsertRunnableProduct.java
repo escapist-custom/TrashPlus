@@ -6,7 +6,6 @@ import com.example.androidpart.domain.Product;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
-import com.example.androidpart.rest.impl.AppApiVolley;
 
 public class InsertRunnableProduct implements Runnable {
     private final ProductTrashPlusDao productDao;

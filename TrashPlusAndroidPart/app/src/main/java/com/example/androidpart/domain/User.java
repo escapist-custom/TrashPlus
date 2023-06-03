@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey;
 
 import com.example.androidpart.repository.user.TrashPlusContractUser;
 
-import java.util.List;
 
 @Entity(tableName = "users", indices = {@Index(value = "email", unique = true)})
 public class User {
@@ -48,22 +47,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public long getId() {

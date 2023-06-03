@@ -8,7 +8,6 @@ public class TrashPlusContractUser {
     private TrashPlusContractUser() {}
 
     public static class UserEntry implements BaseColumns {
-        public static final String TABLE_NAME = "user";
 
         public static final String DATABASE_NAME = "AndroidTrashPlus.db";
 

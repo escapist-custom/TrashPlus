@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    Product insert(Product product);
 
     ProductDto findByCode(long code);
 
