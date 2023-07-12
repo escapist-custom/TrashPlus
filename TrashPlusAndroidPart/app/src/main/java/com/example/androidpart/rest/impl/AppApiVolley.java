@@ -43,7 +43,7 @@ import java.util.concurrent.Executors;
 public class AppApiVolley implements AppApi {
 
     public static final String VOLLEYERROR = "VOLLEYERROR";
-    private static final String BASE_URL = "http://94.103.92.3:8080";
+    private static final String BASE_URL = "http://192.168.1.49:8080";
     public static final String DATA_SAVED = "DATA_SAVED";
     private Fragment fragment;
     private InsertRunnableUser insertRunnableUser;
@@ -73,8 +73,7 @@ public class AppApiVolley implements AppApi {
                     User user = UserMapper.getFromJson(response, password);
                     JSONArray productsJson = response.getJSONArray("products");
                     List<Product> products = ProductMapper.getArrayFromJson(productsJson);
-
-
+                    
                     insertRunnableProducts = new InsertRunnableProducts(products, MainActivity.db);
                     insertRunnableUser = new InsertRunnableUser(user, MainActivity.db);
 

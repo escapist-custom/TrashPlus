@@ -1,6 +1,5 @@
 package com.samsung.domain;
 
-import com.samsung.repository.ProductRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

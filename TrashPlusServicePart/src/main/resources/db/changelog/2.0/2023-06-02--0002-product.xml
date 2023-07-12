@@ -6,7 +6,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2023-04-05--0002-product" author="kpetrovskiy">
+    <changeSet id="2023-06-02--0002-product" author="kpetrovskiy">
         <preConditions>
             <not>
                 <tableExists tableName="products"/>

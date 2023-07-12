@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(user.getPassword()))
                 .products(user.getProducts())
                 .build();
-        newUser.setProducts(user.getProducts());
         for (int i = 0; i < newUser.getProducts().size(); i++) {
             linkRepository.addProduct(newUser.getId(), newUser.getProducts().get(i).getId());
         }

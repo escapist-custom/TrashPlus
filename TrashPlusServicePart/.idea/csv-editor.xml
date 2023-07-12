@@ -3,27 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="C:\Users\petro\OneDrive\Desktop\db\changelog\data\csv\2023-03-13--0001-user-data.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="C:\Users\petro\OneDrive\Desktop\db\changelog\data\csv\2023-05-04--0002-product-data.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="C:\Users\petro\OneDrive\Desktop\db\changelog\data\csv\2023-05-04--0003-user_product-data.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\src\main\resources\db\changelog\data\csv\2023-03-13--0001-user-data.csv">
           <value>
             <Attribute>

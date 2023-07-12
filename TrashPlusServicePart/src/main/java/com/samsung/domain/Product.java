@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "product_code", unique = true)
     private long productCode;
 
-    @Column(name = "information")
+    @Column(name = "information", nullable = false, columnDefinition = "TEXT")
     private String information;
 
     @Column(name = "link_photo")

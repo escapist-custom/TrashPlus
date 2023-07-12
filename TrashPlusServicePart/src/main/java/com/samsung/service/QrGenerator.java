@@ -17,7 +17,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QrGenerator {
 
-	// Function to create the QR code
 	public static void createQR(String data, String path,
 								String charset, Map hashMap,
 								int height, int width)
@@ -34,19 +33,15 @@ public class QrGenerator {
 			new File(path));
 	}
 
-	// Driver code
 	public static void main(String[] args)
 		throws WriterException, IOException,
 			NotFoundException
 	{
 
-		// The data that the QR code will contain
 		String data = "4607035890024/40FE";
 
-		// The path where the image will get saved
 		String path = "Горошек зеленый консервированный, т.з. «6 Соток».png";
 
-		// Encoding charset
 		String charset = "UTF-8";
 
 		Map<EncodeHintType, ErrorCorrectionLevel> hashMap
@@ -56,9 +51,7 @@ public class QrGenerator {
 		hashMap.put(EncodeHintType.ERROR_CORRECTION,
 					ErrorCorrectionLevel.L);
 
-		// Create the QR code and save
-		// in the specified folder
-		// as a jpg file
+
 		createQR(data, path, charset, hashMap, 200, 200);
 		System.out.println("QR Code Generated!!! ");
 	}

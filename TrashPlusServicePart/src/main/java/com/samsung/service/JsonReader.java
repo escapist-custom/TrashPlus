@@ -1,6 +1,7 @@
 package com.samsung.service;
 
-import org.h2.util.json.JSONObject;
+
+import org.json.JSONObject;
 
 import java.io.Reader;
 
@@ -9,7 +10,7 @@ public interface JsonReader {
         return null;
     }
 
-    public static JSONObject readFromLink(String link) {
+    static JSONObject readFromLink(String link) {
         return null;
     }
 }
