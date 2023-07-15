@@ -4,6 +4,7 @@ import com.samsung.domain.Product;
 import com.samsung.domain.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     User save(User user);
@@ -12,7 +13,7 @@ public interface UserService {
 
     User update(User user);
 
-    List<Product> getScannedProducts(long id);
+    Set<Product> getScannedProducts(long id);
 
     void deleteByEmail(String email);
 

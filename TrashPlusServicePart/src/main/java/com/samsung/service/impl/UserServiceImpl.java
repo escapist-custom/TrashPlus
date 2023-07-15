@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -47,14 +48,11 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(user.getPassword()))
                 .products(user.getProducts())
                 .build();
-        for (int i = 0; i < newUser.getProducts().size(); i++) {
-            linkRepository.addProduct(newUser.getId(), newUser.getProducts().get(i).getId());
-        }
         return newUser;
     }
 
     @Override
-    public List<Product> getScannedProducts(long id) {
+    public Set<Product> getScannedProducts(long id) {
         return userRepository.findByProducts(id);
     }
 

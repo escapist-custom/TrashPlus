@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -34,7 +36,7 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private List<Product> products = new ArrayList<>();
+    @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "products_id"))
+    private Set<Product> products = new HashSet<>();
 }

@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -33,5 +35,5 @@ public class Product {
     private String linkPhoto;
 
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-    private List<User> users;
+    private Set<User> users = new HashSet<>();
 }

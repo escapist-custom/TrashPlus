@@ -2,9 +2,9 @@ server:
   port: 8080
 
 spring:
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/changelog/db.changelog-master.xml
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:/db/changelog/db.changelog-master.xml
   datasource:
     url: jdbc:h2:mem:trash_plus_service
     driverClassName: org.h2.Driver
@@ -12,7 +12,7 @@ spring:
     console.enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    showsql: true
+    show-sql: true
     generate-ddl: false
     hibernate:
       ddl-auto: none
