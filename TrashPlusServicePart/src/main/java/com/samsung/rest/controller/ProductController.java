@@ -4,9 +4,7 @@ import com.samsung.rest.dto.ProductDto;
 import com.samsung.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,5 +16,11 @@ public class ProductController {
     @GetMapping("/product/{codeProduct}")
     public ProductDto findByCodeProduct(@PathVariable("codeProduct") long codeProduct) {
         return productService.findByCode(codeProduct);
+    }
+
+    @PostMapping("/product/add/{codeProduct}")
+    public ProductDto addProduct(@PathVariable("codeProduct") long codeProduct,
+                                 @RequestBody ProductDto productDto) {
+        return ProductDto.toDto(productService.addProduct(productDto));
     }
 }

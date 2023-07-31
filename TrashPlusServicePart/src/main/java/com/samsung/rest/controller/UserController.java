@@ -10,7 +10,6 @@ import com.samsung.rest.dto.ProductDto;
 import com.samsung.rest.dto.UserDto;
 import com.samsung.service.ProductService;
 import com.samsung.service.UserService;
-import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,19 +52,21 @@ public class UserController {
         return UserDto.toDto(userService.save(UserDto.fromDto(userDto, newProducts)));
     }
 
-    // This method is for future functionality
     @Transactional
-    @PostMapping("/user/{email}")
+    @PostMapping("/user/addProduct/{email}")
     public User addProduct(
             @PathVariable("email") String email,
-            @RequestParam(value = "products") String productsJson
+            @RequestBody List<Product> productsJson
     ) {
         List<Product> newProducts = new ArrayList<>();
         User user = userService.findByEmail(email);
+        System.out.println(productsJson);
 
-        JSONArray jsonArray = new JSONArray(productsJson);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+        JSONObject userIn = new JSONObject(productsJson);
+        System.out.println(userIn);
+        JSONArray products = userIn.getJSONArray("products");
+        for (int i = 0; i < products.length(); i++) {
+            JSONObject jsonObject = (JSONObject) products.get(i);
             String nameOfProduct = jsonObject.getString("nameOfProduct");
             String photoLink = jsonObject.getString("photoLink");
             String information = jsonObject.getString("information");
@@ -79,9 +80,10 @@ public class UserController {
                     .build();
             newProducts.add(product);
         }
+        System.out.println(newProducts);
         user.setProducts(newProducts);
-        userService.update(user);
-        /*System.out.println(productRepository.findAllMy() + " PRODUCT IN DB");
+        userService.save(user);
+        /*System.out.println(productRepository.findAllMy() + " PRODUCT FROM DB");
         System.out.println(userRepository.findByEmail(user.getEmail()) + " USER FROM DB");
         for (int i = 0; i < newProducts.size(); i++) {
             if (productService.findProduct(newProducts.get(i).getId()).isPresent());

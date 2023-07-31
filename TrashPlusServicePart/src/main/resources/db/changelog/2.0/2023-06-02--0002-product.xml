@@ -14,7 +14,7 @@
         </preConditions>
 
         <createTable tableName="products">
-            <column name="id"
+            <column name="product_id"
                     type="BIGINT"
                     autoIncrement="true">
                 <constraints nullable="false"
@@ -42,7 +42,6 @@
                     <constraints nullable="false"/>
             </column>
         </createTable>
-
     </changeSet>
 
 </databaseChangeLog>

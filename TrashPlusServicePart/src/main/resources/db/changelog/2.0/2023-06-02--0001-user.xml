@@ -14,7 +14,7 @@
         </preConditions>
 
         <createTable tableName="users">
-            <column name="id"
+            <column name="user_id"
                     type="BIGINT"
                     autoIncrement="true">
                 <constraints nullable="false"

@@ -4,7 +4,6 @@ import com.samsung.domain.Product;
 import com.samsung.domain.User;
 import com.samsung.exception.UserAlreadyExistsException;
 import com.samsung.exception.UserNotFoundException;
-import com.samsung.repository.LinkRepository;
 import com.samsung.repository.UserRepository;
 import com.samsung.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final LinkRepository linkRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -47,9 +45,9 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(user.getPassword()))
                 .products(user.getProducts())
                 .build();
-        for (int i = 0; i < newUser.getProducts().size(); i++) {
+        /*for (int i = 0; i < newUser.getProducts().size(); i++) {
             linkRepository.addProduct(newUser.getId(), newUser.getProducts().get(i).getId());
-        }
+        }*/
         return newUser;
     }
 

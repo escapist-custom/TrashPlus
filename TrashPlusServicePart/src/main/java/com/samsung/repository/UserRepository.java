@@ -2,12 +2,14 @@ package com.samsung.repository;
 
 import com.samsung.domain.Product;
 import com.samsung.domain.User;
+import jakarta.persistence.SecondaryTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

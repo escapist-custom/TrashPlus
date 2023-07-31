@@ -4,16 +4,14 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidpart.MainActivity;
 import com.example.androidpart.domain.Product;
@@ -27,7 +25,6 @@ import com.example.androidpart.runnable.product.InsertRunnableProduct;
 import com.example.androidpart.runnable.product.InsertRunnableProducts;
 import com.example.androidpart.runnable.user.InsertRunnableUser;
 import com.example.androidpart.service.QRAnalyzer;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +61,7 @@ public class AppApiVolley implements AppApi {
         String url = BASE_URL + "/user/" + email;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
+                Method.GET,
                 url,
                 null, new Response.Listener<JSONObject>() {
             @Override
@@ -125,7 +122,7 @@ public class AppApiVolley implements AppApi {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
+                Method.POST,
                 url, params,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -155,7 +152,7 @@ public class AppApiVolley implements AppApi {
         String url = BASE_URL + "/product/" + productCode;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
+                Method.GET,
                 url,
                 null,
                 new Response.Listener<JSONObject>() {
@@ -198,38 +195,36 @@ public class AppApiVolley implements AppApi {
 
     @Override
     public void updateUser(User user, List<Product> products) {
-        RequestQueue requestQueue = Volley.newRequestQueue(fragment.getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user/" + user.getEmail();
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("nickName", user.getNickName());
+            params.put("address", user.getAddress());
+            params.put("email", user.getEmail());
+            params.put("password", user.getPassword());
+            params.put("products", products);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Method.POST,
+                url, params,
+                new Response.Listener() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(Object response) {
                         Log.i(DATA_SAVED, response.toString());
-                    }},
+                    }
+                },
                 new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("PARAMS_ERROR", error.getStackTrace().toString());
-                    Toast.makeText(fragment.getContext(), "Не удалось сохранить данные",
-                            Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("PARAMS_ERROR", error.getStackTrace().toString());
+                        Toast.makeText(fragment.getContext(), "Не удалось сохранить данные",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
-        }) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                Gson gson = new Gson();
-                String json = gson.toJson(products);
-                params.put("nickName", user.getNickName());
-                params.put("address", user.getAddress());
-                params.put("email", user.getEmail());
-                params.put("password", user.getPassword());
-                params.put("products", json);
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
+        );
+        requestQueue.add(jsonObjectRequest);
     }
 }

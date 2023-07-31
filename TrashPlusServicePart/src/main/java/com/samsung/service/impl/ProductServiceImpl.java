@@ -61,4 +61,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllMy();
     }
 
+    @Override
+    public Product addProduct(ProductDto productDto) {
+        return productRepository.save(ProductDto.fromDtoToProduct(productDto));
+    }
+
 }

@@ -7,9 +7,9 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--Creating the tables-->
-    <include file="db/changelog/1.0/2023-03-13--0001-user.xml"/>
-    <include file="db/changelog/1.0/2023-05-04--0002-product.xml"/>
-    <include file="db/changelog/1.0/2023-05-04--0003-user_product.xml"/>
+    <include file="db/changelog/2.0/2023-06-02--0001-user.xml"/>
+    <include file="db/changelog/2.0/2023-06-02--0002-product.xml"/>
+    <include file="db/changelog/2.0/2023-06-02--0003-user_product.xml"/>
 
     <!--Fulling the tables-->
     <include file="db/changelog/data/2023-03-13--0001-user-data.xml"/>

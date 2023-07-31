@@ -15,4 +15,6 @@ public interface ProductService {
 
     Optional<Product> findProduct(long code);
     List<Product> findAll();
+
+    Product addProduct(ProductDto productDto);
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductDto {
 
-    private long id;
+    private long productId;
     private String nameOfProduct;
     private long productCode;
     private String information;
@@ -20,7 +20,7 @@ public class ProductDto {
 
     public static Product fromDtoToProduct(ProductDto productDto) {
         return Product.builder()
-                .id(productDto.getId())
+                .productId(productDto.getProductId())
                 .nameOfProduct(productDto.getNameOfProduct())
                 .productCode(productDto.getProductCode())
                 .information(productDto.getInformation())
@@ -30,7 +30,7 @@ public class ProductDto {
 
     public static ProductDto toDto(Product product) {
         return ProductDto.builder()
-                .id(product.getId())
+                .productId(product.getProductId())
                 .nameOfProduct(product.getNameOfProduct())
                 .productCode(product.getProductCode())
                 .information(product.getInformation())

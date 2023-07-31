@@ -2,26 +2,21 @@ package com.samsung.rest.dto;
 
 import com.samsung.domain.Product;
 import com.samsung.domain.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Builder
-@Getter
+@AllArgsConstructor
+@Data
 public class UserDto {
-    private final String nickName;
-    private final String address;
-    private final String email;
-    private final String password;
-    private final List<ProductDto> products;
+    private String nickName;
+    private String address;
+    private String email;
+    private String password;
+    private List<ProductDto> products;
 
     public static UserDto toDto(User user) {
         List<ProductDto> userDtoProducts;
