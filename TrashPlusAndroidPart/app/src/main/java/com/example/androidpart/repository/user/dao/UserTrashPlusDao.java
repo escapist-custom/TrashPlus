@@ -10,7 +10,8 @@ import androidx.room.Update;
 import com.example.androidpart.domain.User;
 
 @Dao
-public interface UserTrashPlusDao {
+public interface
+UserTrashPlusDao {
 
     @Query("SELECT * FROM users WHERE email = :email")
     User findByEmail(String email);

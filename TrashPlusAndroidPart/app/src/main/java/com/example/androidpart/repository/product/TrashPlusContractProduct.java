@@ -13,6 +13,7 @@ public class TrashPlusContractProduct {
         public static final String COLUMN_PHOTO_LINK = "photo_link";
         public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_COVER_CODE = "cover_code";
+        public static final String COLUMN_JUST_ADDED = "flag_added";
 
     }
 

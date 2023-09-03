@@ -4,7 +4,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="2023-06-02--0001-user" author="kpetrovskiy">
+    <changeSet id="2023-11-15--0001-user" author="kpetrovskiy">
         <preConditions>
             <dbms type="postgresql"/>
             <runningAs username="postgres"/>

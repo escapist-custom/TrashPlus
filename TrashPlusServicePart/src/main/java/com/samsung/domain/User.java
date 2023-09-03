@@ -3,7 +3,9 @@ package com.samsung.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Builder
@@ -21,17 +23,22 @@ public class User {
     @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "address")
-    private String address;
-
     @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @Column(name = "control_sum")
+    private int controlSum;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH})
     @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId"))
-    private List<Product> products = new ArrayList<>();
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "product_id"))
+    private Set<Product> products = new HashSet<>();
+    
+    public void addProduct(Product product) { 
+    	products.add(product);
+    }
 }

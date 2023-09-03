@@ -13,35 +13,35 @@ import java.util.stream.Collectors;
 @Data
 public class UserDto {
     private String nickName;
-    private String address;
     private String email;
     private String password;
-    private List<ProductDto> products;
+    private Set<ProductDto> products;
+    private int controlSum;
 
     public static UserDto toDto(User user) {
-        List<ProductDto> userDtoProducts;
+        Set<ProductDto> userDtoProducts;
         if (user.getProducts() != null) {
-            userDtoProducts = user.getProducts().stream().map(ProductDto::toDto).collect(Collectors.toList());
+            userDtoProducts = user.getProducts().stream().map(ProductDto::toDto).collect(Collectors.toSet());
         } else {
-            userDtoProducts = new ArrayList<>();
+            userDtoProducts = new HashSet<>();
         }
 
         return UserDto.builder()
                 .nickName(user.getNickName())
-                .address(user.getAddress())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .products(userDtoProducts)
+                .controlSum(user.getControlSum())
                 .build();
     }
 
-    public static User fromDto(UserDto userDto, List<Product> products) {
+    public static User fromDto(UserDto userDto, Set<Product> products) {
         return User.builder()
                 .nickName(userDto.getNickName())
-                .address(userDto.getAddress())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .products(products)
+                .controlSum(userDto.getControlSum())
                 .build();
     }
 
@@ -49,10 +49,10 @@ public class UserDto {
     public String toString() {
         return "UserDto{" +
                 "nickName='" + nickName + '\'' +
-                ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", products=" + products +
+                ", controlSum=" + controlSum +
                 '}';
     }
 }

@@ -6,14 +6,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 @RequiredArgsConstructor
 @RestController
 public class ProductController {
+	
+	@Autowired
+    private final ProductService productService = null;
 
-    @Autowired
-    private final ProductService productService;
-
-    @GetMapping("/product/{codeProduct}")
+    @GetMapping("product/{codeProduct}")
     public ProductDto findByCodeProduct(@PathVariable("codeProduct") long codeProduct) {
         return productService.findByCode(codeProduct);
     }

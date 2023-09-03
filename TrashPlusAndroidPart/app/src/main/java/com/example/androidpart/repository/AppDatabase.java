@@ -17,21 +17,24 @@ import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
 @Database(entities = {User.class, Product.class},
         version = TrashPlusContractUser.UserEntry.DATABASE_VERSION
-    )
+)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
+
     public abstract UserTrashPlusDao trashPlusDaoUser();
+
     public abstract ProductTrashPlusDao trashPlusDaoProduct();
+
     public static AppDatabase getInstance(Context context) {
 
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, TrashPlusContractUser.UserEntry.DATABASE_NAME)
+                                    AppDatabase.class, TrashPlusContractUser.UserEntry.DATABASE_NAME)
                             .addMigrations(MIGRATION_2_3, MIGRATION_1_2, MIGRATION_3_4,
-                                    MIGRATION_4_5)
+                                    MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
                             .build();
                     return INSTANCE;
                 }
@@ -39,6 +42,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
@@ -67,6 +71,38 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE products ADD cover_code TEXT;");
+        }
+    };
+
+    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE users ADD control_sum INTEGER DEFAULT 0 NOT NULL;");
+        }
+    };
+
+    public static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE products ADD flag_added INTEGER NOT NULL DEFAULT(0);");
+        }
+    };
+
+    public static final Migration MIGRATION_7_8 = new Migration(7, 8) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE backup (" +
+                    "'control_sum' INTEGER NOT NULL DEFAULT(0)," +
+                    "'password' TEXT," +
+                    "'id' INTEGER NOT NULL, " +
+                    "'email' TEXT, " +
+                    "'nick_name' TEXT, " +
+                    " PRIMARY KEY('id')" +
+                    ");"
+            );
+            database.execSQL("DROP TABLE users;");
+            database.execSQL("ALTER TABLE backup RENAME TO users;");
+            database.execSQL("CREATE UNIQUE INDEX index_users_email ON users (email);");
         }
     };
 

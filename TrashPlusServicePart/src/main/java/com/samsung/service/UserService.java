@@ -1,11 +1,8 @@
 package com.samsung.service;
 
-import com.samsung.domain.Product;
 import com.samsung.domain.User;
-import jakarta.persistence.SecondaryTable;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public interface UserService {
     User save(User user);
@@ -14,7 +11,7 @@ public interface UserService {
 
     User update(User user);
 
-    List<Product> getScannedProducts(long id);
+    Map<String, Object> getUserProducts(User user);
 
     void deleteByEmail(String email);
 

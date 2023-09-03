@@ -51,17 +51,13 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
     public final MultiFormatReader multiFormatReader;
     private AppApiVolley appApiVolley;
     private static Context context;
-    private Fragment fragment;
     public static Result result;
     public static boolean scanFlag = true;
-    private final ProductTrashPlusDao productTrashPlusDao;
     public ImageProxy imageProxy;
     private static String classOfProduct = "";
 
     public QRAnalyzer(Context context, AppDatabase db, Fragment fragment) {
         multiFormatReader = new MultiFormatReader();
-        productTrashPlusDao = db.trashPlusDaoProduct();
-        this.fragment = fragment;
         this.context = context;
         Map<DecodeHintType, Object> hintTypeObjectMap = new EnumMap<DecodeHintType, Object>(
                 DecodeHintType.class

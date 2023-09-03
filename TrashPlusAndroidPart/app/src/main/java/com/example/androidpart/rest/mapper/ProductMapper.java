@@ -8,19 +8,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProductMapper {
-    private static List<Product> products = new ArrayList<>();
-    public static List<Product> getArrayFromJson(JSONArray json) throws JSONException {
+    private static Set<Product> products = new HashSet<>();
+
+    public static Set<Product> getArrayFromJson(JSONArray json) throws JSONException {
         for (int i = 0; i < json.length(); i++) {
             JSONObject object = (JSONObject) json.get(i);
             products.add(new Product(
                     object.getString("nameOfProduct"),
                     object.getLong("productCode"),
                     object.getString("information"),
-                    object.getString("linkPhoto")
+                    object.getString("linkPhoto"),
+                    object.getString("classOfCover")
             ));
         }
         return products;
@@ -31,7 +33,8 @@ public class ProductMapper {
                 json.getString("nameOfProduct"),
                 json.getLong("productCode"),
                 json.getString("information"),
-                json.getString("linkPhoto")
+                json.getString("linkPhoto"),
+                json.getString("classOfCover")
         );
         Log.i("PROMAP", product.toString());
         return product;

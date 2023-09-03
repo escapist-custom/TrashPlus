@@ -15,7 +15,7 @@ import java.util.List;
 public interface ProductTrashPlusDao {
 
     @Query("SELECT products.id, products.name, products.product_code, products.information, " +
-            "products.photo_link, products.user_id, products.cover_code FROM products WHERE " +
+            "products.photo_link, products.user_id, products.cover_code, products.flag_added FROM products WHERE " +
             " products.user_id = :id")
     List<Product> getAllProducts(long id);
 

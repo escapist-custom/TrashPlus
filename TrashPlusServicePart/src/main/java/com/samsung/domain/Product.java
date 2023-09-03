@@ -1,12 +1,13 @@
 package com.samsung.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -18,6 +19,7 @@ public class Product {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id", unique = true)
     private long productId;
 
     @Column(name = "name")
@@ -32,6 +34,11 @@ public class Product {
     @Column(name = "link_photo")
     private String linkPhoto;
 
+    @Column(name = "class_cover")
+    private String classOfCover;
+
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-    private List<User> users;
+    @JsonIgnore
+    private Set<User> users;
+    
 }

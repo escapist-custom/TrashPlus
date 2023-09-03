@@ -2,7 +2,6 @@ package com.samsung.service.impl;
 
 import com.samsung.domain.Product;
 import com.samsung.repository.ProductRepository;
-import com.samsung.repository.UserRepository;
 import com.samsung.rest.dto.ProductDto;
 import com.samsung.service.ProductService;
 import org.json.JSONObject;
@@ -11,17 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private UserRepository userRepository;
-    private static UserRepository userRepositoryStatic;
-    private static ProductRepository productRepositoryStatic;
     private JsonReaderImpl jsonReader;
     private final String API_URL = "https://rskrf.ru/rest/1/search/barcode?barcode=";
 
@@ -43,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
                         .information(description)
                         .linkPhoto(image)
                         .build();
-                productRepository.save(product);
             }
             return ProductDto.toDto(product);
         } catch (IOException e) {
@@ -52,18 +45,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findProduct(long id) {
+    public Product findProduct(long id) {
         return productRepository.findById(id);
     }
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAllMy();
+        return productRepository.findAll();
     }
 
     @Override
     public Product addProduct(ProductDto productDto) {
         return productRepository.save(ProductDto.fromDtoToProduct(productDto));
     }
-
 }

@@ -6,12 +6,12 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.xml
   datasource:
-    url: jdbc:h2:mem:trash_plus_service
-    driverClassName: org.h2.Driver
-  h2:
-    console.enabled: true
+    url: jdbc:postgresql://localhost:5432/postgres
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 12345
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: postgresql
     showsql: true
     generate-ddl: true
     hibernate:

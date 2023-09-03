@@ -4,7 +4,7 @@ import com.samsung.service.JsonReader;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 

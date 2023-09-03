@@ -99,23 +99,6 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <EditText
-        android:id="@+id/et_registration_address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_edit_text"
-        android:gravity="center_vertical"
-        android:hint="@string/enter_address"
-        android:padding="7dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/hint_color"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
-        app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toBottomOf="@+id/et_registration_nick_name"
-        app:layout_constraintVertical_bias="0.05" />
-
-    <EditText
         android:id="@+id/et_registration_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -129,7 +112,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dl_registration_right"
         app:layout_constraintStart_toStartOf="@+id/dl_registration_left"
-        app:layout_constraintTop_toBottomOf="@id/et_registration_address"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_nick_name"
         app:layout_constraintVertical_bias="0.05" />
 
     <EditText

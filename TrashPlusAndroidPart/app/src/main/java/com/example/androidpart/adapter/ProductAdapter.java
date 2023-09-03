@@ -3,6 +3,7 @@ package com.example.androidpart.adapter;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,12 @@ import com.example.androidpart.domain.Product;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private List<Product> products;
+    private Set<Product> products;
 
     @NonNull
     @Override
@@ -35,13 +38,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-    public ProductAdapter(List<Product> products) {
+    public ProductAdapter(Set<Product> products) {
         this.products = products;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = products.get(position);
+        List<Product> productList = products.stream().collect(Collectors.toList());
+        Product product = productList.get(position);
         holder.nameOfProduct.setText(product.getNameOfProduct());
         String shortInfo = "";
         if (product.getInformation().length() > 10) {
@@ -101,6 +105,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+        Log.i("PRODUCT", product.getClassOfCover().toString());
         infoCovering.setText(settingTexts(product.getClassOfCover()));
         nameOfProductSheet.setText(product.getNameOfProduct());
         infoProduct.setText(product.getInformation());

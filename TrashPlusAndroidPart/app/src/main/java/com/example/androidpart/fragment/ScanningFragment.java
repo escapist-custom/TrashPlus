@@ -26,6 +26,7 @@ import com.example.androidpart.databinding.ScanningFragmentBinding;
 import com.example.androidpart.service.QRAnalyzer;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.concurrent.ExecutionException;
 
 public class ScanningFragment extends Fragment {
@@ -61,7 +62,7 @@ public class ScanningFragment extends Fragment {
                         switch (item.getItemId()) {
                             case (R.id.person):
                                 NavHostFragment.findNavController(ScanningFragment.this)
-                                    .navigate(R.id.action_scanningFragment_to_informationFragment);
+                                        .navigate(R.id.action_scanningFragment_to_informationFragment);
                                 break;
                         }
                         return false;

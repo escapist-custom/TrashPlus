@@ -17,6 +17,7 @@ public class ProductDto {
     private long productCode;
     private String information;
     private String linkPhoto;
+    private String classOfCover;
 
     public static Product fromDtoToProduct(ProductDto productDto) {
         return Product.builder()
@@ -25,6 +26,7 @@ public class ProductDto {
                 .productCode(productDto.getProductCode())
                 .information(productDto.getInformation())
                 .linkPhoto(productDto.getLinkPhoto())
+                .classOfCover(productDto.getClassOfCover())
                 .build();
     }
 
@@ -35,7 +37,7 @@ public class ProductDto {
                 .productCode(product.getProductCode())
                 .information(product.getInformation())
                 .linkPhoto(product.getLinkPhoto())
+                .classOfCover(product.getClassOfCover())
                 .build();
     }
-
 }

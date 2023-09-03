@@ -31,15 +31,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 
 public class AppApiVolley implements AppApi {
 
-    public static final String VOLLEYERROR = "VOLLEYERROR";
     private static final String BASE_URL = "http://192.168.1.49:8080";
     public static final String DATA_SAVED = "DATA_SAVED";
     private Fragment fragment;
@@ -58,7 +60,7 @@ public class AppApiVolley implements AppApi {
         ExecutorService service = Executors.newFixedThreadPool(2);
 
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
-        String url = BASE_URL + "/user/" + email;
+        String url = BASE_URL + "/user/scannedProducts/" + email;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Method.GET,
@@ -67,10 +69,12 @@ public class AppApiVolley implements AppApi {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    User user = UserMapper.getFromJson(response, password);
+                    User user = UserMapper.getFromJson(response.getJSONObject("user"),
+                            password);
                     JSONArray productsJson = response.getJSONArray("products");
-                    List<Product> products = ProductMapper.getArrayFromJson(productsJson);
-                    
+                    Log.i("PRODUCTS_IN", productsJson.toString());
+                    Set<Product> products = ProductMapper.getArrayFromJson(productsJson);
+
                     insertRunnableProducts = new InsertRunnableProducts(products, MainActivity.db);
                     insertRunnableUser = new InsertRunnableUser(user, MainActivity.db);
 
@@ -87,7 +91,7 @@ public class AppApiVolley implements AppApi {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("BadCredentialsAppApi", email);
+                Log.i("BadCredentialsAppApi", error.toString());
                 if (fragment.getClass().equals(LoginFragment.class)) {
                     ((LoginFragment) fragment).makeToastBadCredentials();
                 }
@@ -110,17 +114,18 @@ public class AppApiVolley implements AppApi {
     @Override
     public void insert(User user) {
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
-        String url = BASE_URL + "/user";
+        String url = BASE_URL + "/user/" + user.getEmail();
         JSONObject params = new JSONObject();
         try {
             params.put("nickName", user.getNickName());
-            params.put("address", user.getAddress());
             params.put("email", user.getEmail());
             params.put("password", user.getPassword());
+            params.put("controlSum", user.getControlSum());
+            params.put("products", user.getNewProducts());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-
+        Log.i("Params", params.toString());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Method.POST,
                 url, params,
@@ -160,6 +165,7 @@ public class AppApiVolley implements AppApi {
                     public void onResponse(JSONObject response) {
                         try {
                             Product product = ProductMapper.getProductFromJson(response);
+                            product.setJustAdded(true);
                             insertRunnableProduct = new InsertRunnableProduct(MainActivity.db,
                                     product);
 
@@ -175,9 +181,7 @@ public class AppApiVolley implements AppApi {
                             } else {
                                 getProduct(productCode);
                             }
-
                             service.execute(insertRunnableProduct);
-
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -194,16 +198,35 @@ public class AppApiVolley implements AppApi {
     }
 
     @Override
-    public void updateUser(User user, List<Product> products) {
+    public void updateUser(User user, Set<Product> productsSet) {
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
-        String url = BASE_URL + "/user/" + user.getEmail();
+        String url = BASE_URL + "/user/addProduct/" + user.getEmail();
         JSONObject params = new JSONObject();
+        JSONArray productsJson = new JSONArray();
+        List<Product> productList = productsSet.stream().collect(Collectors.toList());
+        Log.i("PRODUCT LIST", productList.toString());
+        for (int i = 0; i < productList.size(); i++) {
+            JSONObject product = new JSONObject();
+            try {
+                if (productList.get(i).isJustAdded()) {
+                    product.put("nameOfProduct", productList.get(i).getNameOfProduct());
+                    product.put("productCode", productList.get(i).getProductCode());
+                    product.put("information", productList.get(i).getInformation());
+                    product.put("linkPhoto", productList.get(i).getPhotoLink());
+                    product.put("classOfCover", productList.get(i).getClassOfCover());
+                    Log.i("classOfCOver", productList.get(i).getClassOfCover());
+                    productsJson.put(product);
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try {
             params.put("nickName", user.getNickName());
-            params.put("address", user.getAddress());
             params.put("email", user.getEmail());
             params.put("password", user.getPassword());
-            params.put("products", products);
+            params.put("products", productsJson);
+            params.put("controlSum", MainActivity.controlSum);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -214,6 +237,7 @@ public class AppApiVolley implements AppApi {
                     @Override
                     public void onResponse(Object response) {
                         Log.i(DATA_SAVED, response.toString());
+                        user.setNewProducts(new HashSet<>());
                     }
                 },
                 new Response.ErrorListener() {
@@ -226,5 +250,33 @@ public class AppApiVolley implements AppApi {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public Integer getControlSum(String email) {
+        RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
+        String url = BASE_URL + "/getSum/" + email;
+        final Integer[] globalControlSum = {0};
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Integer controlSum;
+                try {
+                    controlSum = response.getInt("controlSum");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                globalControlSum[0] = controlSum;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }
+        );
+        requestQueue.add(jsonObjectRequest);
+        return globalControlSum[0];
     }
 }

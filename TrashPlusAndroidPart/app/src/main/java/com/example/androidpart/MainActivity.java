@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     public static AppDatabase db;
+    public static Integer controlSum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -37,7 +37,6 @@ public class RegistrationFragment extends Fragment {
             public void onClick(View view) {
                 User user = new User(
                         binding.etRegistrationNickName.getText().toString(),
-                        binding.etRegistrationAddress.getText().toString(),
                         binding.etRegistrationEmail.getText().toString(),
                         binding.etRegistrationPassword.getText().toString());
                 service.execute(new InsertRunnableUser(user, MainActivity.db));
@@ -46,11 +45,13 @@ public class RegistrationFragment extends Fragment {
         });
         return view;
     }
-    public void signIn(){
+
+    public void signIn() {
         NavHostFragment.findNavController(RegistrationFragment.this)
                 .navigate(R.id.action_registrationFragment_to_informationFragment);
     }
-    public void makeToastFailedRegistration(){
+
+    public void makeToastFailedRegistration() {
         Toast.makeText(getContext(), "Error during registration ", Toast.LENGTH_SHORT).show();
     }
 

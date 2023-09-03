@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment {
         NavHostFragment.findNavController(LoginFragment.this)
                 .navigate(R.id.action_loginFragment_to_informationFragment);
     }
+
     public void makeToastBadCredentials(){
         Toast.makeText(getContext(), "Error in login or password", Toast.LENGTH_SHORT).show();
     }

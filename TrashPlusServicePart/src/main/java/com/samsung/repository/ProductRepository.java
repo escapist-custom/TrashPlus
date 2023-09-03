@@ -10,8 +10,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products", nativeQuery = true)
-    List<Product> findAllMy();
+    List<Product> findAll();
     Product findByProductCode(long code);
+    Product findById(long id);
 
     Product save(Product product);
 }

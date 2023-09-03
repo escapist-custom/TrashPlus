@@ -7,6 +7,15 @@
     android:background="@color/white">
     <!--tools:context="com.example.androidpart.BottomSheetActivity-->
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_login_sign_in"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/setting_svgrepo_com"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/dl_user_right"
+        app:layout_constraintTop_toBottomOf="@+id/dl_user_top" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/dl_user_top"
         android:layout_width="0dp"
@@ -33,6 +42,7 @@
         android:layout_height="60dp"
         android:background="@color/main_green"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

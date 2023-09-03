@@ -32,11 +32,32 @@ public class Product{
     @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_COVER_CODE)
     private String classOfCover;
 
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_JUST_ADDED)
+    private boolean justAdded = false;
+
+    public boolean isJustAdded() {
+        return justAdded;
+    }
+
+    public void setJustAdded(boolean justAdded) {
+        this.justAdded = justAdded;
+    }
+
+    @Ignore
     public Product(String nameOfProduct, long productCode, String information, String photoLink) {
         this.nameOfProduct = nameOfProduct;
         this.productCode = productCode;
         this.information = information;
         this.photoLink = photoLink;
+    }
+
+    public Product(String nameOfProduct, long productCode, String information, String photoLink,
+                   String classOfCover) {
+        this.nameOfProduct = nameOfProduct;
+        this.productCode = productCode;
+        this.information = information;
+        this.photoLink = photoLink;
+        this.classOfCover = classOfCover;
     }
 
     public String getClassOfCover() {

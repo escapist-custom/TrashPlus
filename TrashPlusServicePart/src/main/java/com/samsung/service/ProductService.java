@@ -13,7 +13,7 @@ public interface ProductService {
 
     ProductDto findByCode(long code);
 
-    Optional<Product> findProduct(long code);
+    Product findProduct(long code);
     List<Product> findAll();
 
     Product addProduct(ProductDto productDto);

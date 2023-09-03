@@ -1,16 +1,22 @@
 package com.samsung.security;
 
 import com.samsung.domain.User;
+
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@RequiredArgsConstructor
+
+@AllArgsConstructor
 public class SecurityUser implements UserDetails {
 
+	@Autowired
     private final User user;
 
     @Override

@@ -10,9 +10,9 @@ public class UserMapper {
     public static User getFromJson(JSONObject jsonObject, String password) throws JSONException {
         return new User(
                 jsonObject.getString("nickName"),
-                jsonObject.getString("address"),
                 jsonObject.getString("email"),
-                password);
+                password
+        );
     }
 
 }

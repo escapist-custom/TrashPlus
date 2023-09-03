@@ -4,11 +4,10 @@ import com.samsung.domain.Product;
 import com.samsung.domain.User;
 import com.samsung.exception.UserAlreadyExistsException;
 import com.samsung.exception.UserNotFoundException;
-import com.samsung.repository.ProductRepository;
-import com.samsung.repository.UserRepository;
 import com.samsung.rest.dto.ProductDto;
 import com.samsung.rest.dto.UserDto;
 import com.samsung.service.ProductService;
+import com.samsung.service.UserMapper;
 import com.samsung.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
@@ -18,23 +17,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 @RequiredArgsConstructor
 @RestController
 public class UserController {
     @Autowired
-    private final UserService userService;
+    private final UserService userService = null;
 
     @Autowired
-    private final UserRepository userRepository;
-    @Autowired
-    private final ProductRepository productRepository;
+    private final ProductService productService = null;
 
-    @Autowired
-    private final ProductService productService;
 
     @GetMapping("/user/{email}")
     public UserDto findUserByEmail(@PathVariable("email") String email) {
@@ -42,8 +39,9 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public UserDto insertUser(@RequestBody UserDto userDto) {
-        List<Product> newProducts = new ArrayList<>();
+    public UserDto insertUser(@RequestBody JSONObject userJson) {
+        Set<Product> newProducts = new HashSet<>();
+        UserDto userDto = UserDto.toDto(UserMapper.getFromJson(userJson));
         if (userDto.getProducts() != null) {
             for (ProductDto productDto : userDto.getProducts()) {
                 newProducts.add(ProductDto.fromDtoToProduct(productDto));
@@ -56,51 +54,56 @@ public class UserController {
     @PostMapping("/user/addProduct/{email}")
     public User addProduct(
             @PathVariable("email") String email,
-            @RequestBody List<Product> productsJson
+            @RequestBody User userFromApp
     ) {
-        List<Product> newProducts = new ArrayList<>();
         User user = userService.findByEmail(email);
-        System.out.println(productsJson);
+        System.out.println("User from app " + userFromApp.toString());
 
-        JSONObject userIn = new JSONObject(productsJson);
-        System.out.println(userIn);
+        JSONObject userIn = new JSONObject(userFromApp);
         JSONArray products = userIn.getJSONArray("products");
         for (int i = 0; i < products.length(); i++) {
             JSONObject jsonObject = (JSONObject) products.get(i);
+            System.out.println("JSON Object " + jsonObject.toString());
             String nameOfProduct = jsonObject.getString("nameOfProduct");
-            String photoLink = jsonObject.getString("photoLink");
+            String photoLink = jsonObject.getString("linkPhoto");
             String information = jsonObject.getString("information");
             long productCode = jsonObject.getLong("productCode");
+            String classOfCover = jsonObject.getString("classOfCover");
+            System.out.println(classOfCover);
 
             Product product = Product.builder()
                     .information(information)
                     .productCode(productCode)
                     .nameOfProduct(nameOfProduct)
                     .linkPhoto(photoLink)
+                    .classOfCover(classOfCover)
                     .build();
-            newProducts.add(product);
+
+            if (!user.getProducts().stream().toList().contains(product)) {
+                user.addProduct(product);
+            }
         }
-        System.out.println(newProducts);
-        user.setProducts(newProducts);
-        userService.save(user);
-        /*System.out.println(productRepository.findAllMy() + " PRODUCT FROM DB");
-        System.out.println(userRepository.findByEmail(user.getEmail()) + " USER FROM DB");
-        for (int i = 0; i < newProducts.size(); i++) {
-            if (productService.findProduct(newProducts.get(i).getId()).isPresent());
-                userRepository.addProduct(user.getId(), newProducts.get(i).getId());
-        }*/
+        user.setNickName(userIn.getString("nickName"));
+        // user.setPassword(userIn.getString("password"));
+        user.setEmail(userIn.getString("email"));
+        user.setControlSum(userIn.getInt("controlSum"));
+        userService.update(user);
         return user;
     }
 
-    @GetMapping("/user/scannedProducts/{id}")
-    public List<ProductDto> getScannedProducts(@PathVariable long id) {
-        List<Product> products = userService.getScannedProducts(id);
-        List<ProductDto> productDtos = new ArrayList<>();
-        for (Product product : products) {
-            ProductDto productDto = ProductDto.toDto(product);
-            productDtos.add(productDto);
-        }
-        return productDtos;
+    @Transactional
+    @GetMapping("/user/scannedProducts/{email}")
+    public Map<String, Object> getUserProducts(@PathVariable(name = "email") String email) {
+        User user = userService.findByEmail(email);
+        return userService.getUserProducts(user);
+    }
+
+    @GetMapping("/getSum/{email}")
+    public Map<String, Integer> getControlSum(@PathVariable(name = "email") String email) {
+        Map<String, Integer> map = new HashMap<>();
+        Integer controlSum = userService.findByEmail(email).getControlSum();
+        map.put("controlSum", controlSum);
+        return map;
     }
 
     @DeleteMapping("/user/{email}")
