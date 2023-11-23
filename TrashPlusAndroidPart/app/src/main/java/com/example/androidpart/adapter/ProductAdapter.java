@@ -21,11 +21,11 @@ import com.example.androidpart.domain.Product;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
+import java.util.Set;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private List<Product> products;
+    private Set<Product> products;
 
     @NonNull
     @Override
@@ -35,13 +35,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-    public ProductAdapter(List<Product> products) {
+    public ProductAdapter(Set<Product> products) {
         this.products = products;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = products.get(position);
+        Product product = (Product) products.toArray()[position];
         holder.nameOfProduct.setText(product.getNameOfProduct());
         String shortInfo = "";
         if (product.getInformation().length() > 10) {

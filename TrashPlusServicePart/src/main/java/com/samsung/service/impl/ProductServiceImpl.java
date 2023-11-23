@@ -57,11 +57,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAllMy();
-    }
-
-    @Override
     public Product addProduct(ProductDto productDto) {
         return productRepository.save(ProductDto.fromDtoToProduct(productDto));
     }

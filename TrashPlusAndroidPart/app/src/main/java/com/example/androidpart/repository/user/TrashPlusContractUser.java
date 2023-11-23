@@ -17,6 +17,7 @@ public class TrashPlusContractUser {
         public static final String COLUMN_ADDRESS = "address";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PASSWORD = "password";
+        public static final String COLUMN_CONTROL_SUM = "controlSum";
 
     }
 

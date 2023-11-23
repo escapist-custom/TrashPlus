@@ -1,8 +1,6 @@
 package com.example.androidpart.runnable.user;
 
 
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
 
 import com.example.androidpart.domain.Product;
@@ -12,7 +10,7 @@ import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 import com.example.androidpart.rest.impl.AppApiVolley;
 
-import java.util.List;
+import java.util.Set;
 
 public class UserUpdateRunnable implements Runnable {
     private ProductTrashPlusDao productDao;
@@ -28,7 +26,7 @@ public class UserUpdateRunnable implements Runnable {
     @Override
     public void run() {
         User user = userDao.getUser();
-        List<Product> products = productDao.getAllProducts(user.getId());
+        Set<Product> products = (Set<Product>) productDao.getAllProducts(user.getId());
         new AppApiVolley(fragment).updateUser(user, products);
     }
 }

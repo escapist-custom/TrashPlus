@@ -14,7 +14,7 @@ public interface UserService {
 
     User update(User user);
 
-    List<Product> getScannedProducts(long id);
+    Set<Product> getScannedProducts(long id);
 
     void deleteByEmail(String email);
 

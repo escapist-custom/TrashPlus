@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="82f41ed4-deb3-4e13-a7ed-b31297d11e5d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../TrashPlusAndroidPart/app/src/main/java/com/example/androidpart/rest/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrashPlusAndroidPart/app/src/main/java/com/example/androidpart/rest/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/samsung/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/samsung/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/samsung/security/JpaUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/samsung/security/SecurityConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/samsung/security/SecurityUser.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="rebuilting-database" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="836ea565-13ec-40ff-9ae5-197940cd719b" />
+        <option name="url" value="https://github.com/escapist-custom/TrashPlus.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2NBvtzCeY2ZqHQDtRO1x79BLYAg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "android-working",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/petro/Desktop/awesome-compose/spring-postgres",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src\main\resources\db\changelog\2.0" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src\main\java\com" />
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src\main\resources" />
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src\main\java\com\samsung\security" />
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src\main\java\com\samsung" />
+      <recent name="C:\Users\petro\TruchPlus\TrashPlus\TrashPlusServicePart\src" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.samsung.App" />
+      <module name="trash-plus-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QrGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.samsung.service.QrGenerator" />
+      <module name="trash-plus-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.samsung.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="trash-plus-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.samsung.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.QrGenerator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82f41ed4-deb3-4e13-a7ed-b31297d11e5d" name="Changes" comment="" />
+      <created>1679150509127</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679150509127</updated>
+      <workItem from="1694934080334" duration="628000" />
+      <workItem from="1695665317477" duration="5323000" />
+      <workItem from="1696363771077" duration="3227000" />
+      <workItem from="1697046677834" duration="2891000" />
+      <workItem from="1697049933393" duration="2495000" />
+    </task>
+    <task id="LOCAL-00001" summary="Registration">
+      <created>1679249082239</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679249082239</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Registration">
+      <created>1679249140714</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679249140714</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Registration">
+      <created>1679250035332</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679250035332</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Registration">
+      <created>1679421893097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679421893097</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Registration">
+      <created>1679511435086</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679511435087</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finished project">
+      <created>1685777774445</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685777774445</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Finished project">
+      <option name="closed" value="true" />
+      <created>1689186222308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689186222308</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Deleted liquibase and file db">
+      <option name="closed" value="true" />
+      <created>1689404412342</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689404412342</updated>
+    </task>
+    <task id="LOCAL-00009" summary="DB">
+      <option name="closed" value="true" />
+      <created>1690836221017</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690836221017</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Finished the saving &quot;many to many&quot; relationship">
+      <option name="closed" value="true" />
+      <created>1693761539555</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1693761539555</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Registration" />
+    <MESSAGE value="Finished project" />
+    <MESSAGE value="Deleted liquibase and file db" />
+    <MESSAGE value="DB" />
+    <MESSAGE value="Finished the saving &quot;many to many&quot; relationship" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished the saving &quot;many to many&quot; relationship" />
+  </component>
+</project>

@@ -18,8 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @RequiredArgsConstructor
@@ -43,7 +42,7 @@ public class UserController {
 
     @PostMapping("/user")
     public UserDto insertUser(@RequestBody UserDto userDto) {
-        List<Product> newProducts = new ArrayList<>();
+        Set<Product> newProducts = new HashSet<>();
         if (userDto.getProducts() != null) {
             for (ProductDto productDto : userDto.getProducts()) {
                 newProducts.add(ProductDto.fromDtoToProduct(productDto));
@@ -56,9 +55,9 @@ public class UserController {
     @PostMapping("/user/addProduct/{email}")
     public User addProduct(
             @PathVariable("email") String email,
-            @RequestBody List<Product> productsJson
+            @RequestBody Set<Product> productsJson
     ) {
-        List<Product> newProducts = new ArrayList<>();
+        Set<Product> newProducts = new HashSet<>();
         User user = userService.findByEmail(email);
         System.out.println(productsJson);
 
@@ -92,10 +91,18 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/getSum/{email}")
+    public Map<String, Integer> getControlSum(@PathVariable(name = "email") String email) {
+        Map<String, Integer> map = new HashMap<>();
+        Integer controlSum = userService.findByEmail(email).getControlSum();
+        map.put("controlSum", controlSum);
+        return map;
+    }
+
     @GetMapping("/user/scannedProducts/{id}")
-    public List<ProductDto> getScannedProducts(@PathVariable long id) {
-        List<Product> products = userService.getScannedProducts(id);
-        List<ProductDto> productDtos = new ArrayList<>();
+    public Set<ProductDto> getScannedProducts(@PathVariable long id) {
+        Set<Product> products = userService.getScannedProducts(id);
+        Set<ProductDto> productDtos = new HashSet<>();
         for (Product product : products) {
             ProductDto productDto = ProductDto.toDto(product);
             productDtos.add(productDto);

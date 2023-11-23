@@ -26,6 +26,10 @@ public class User {
 
     @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_PASSWORD)
     private String password;
+
+    @ColumnInfo(name = TrashPlusContractUser.UserEntry.COLUMN_CONTROL_SUM)
+    private int controlSum;
+
     public User(String nickName, String address, String email, String password) {
         this.nickName = nickName;
         this.address = address;
@@ -43,7 +47,6 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
-
 
     public void setId(long id) {
         this.id = id;
@@ -67,5 +70,13 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public int getControlSum() {
+        return controlSum;
+    }
+
+    public void setControlSum(int controlSum) {
+        this.controlSum = controlSum;
     }
 }

@@ -30,8 +30,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "controlSum")
+    private int controlSum;
+
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId"))
-    private List<Product> products = new ArrayList<>();
+    private Set<Product> products = new HashSet<>();
 }

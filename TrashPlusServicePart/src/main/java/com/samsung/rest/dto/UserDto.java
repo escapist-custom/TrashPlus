@@ -35,7 +35,7 @@ public class UserDto {
                 .build();
     }
 
-    public static User fromDto(UserDto userDto, List<Product> products) {
+    public static User fromDto(UserDto userDto, Set<Product> products) {
         return User.builder()
                 .nickName(userDto.getNickName())
                 .address(userDto.getAddress())

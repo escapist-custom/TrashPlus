@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -194,7 +195,7 @@ public class AppApiVolley implements AppApi {
     }
 
     @Override
-    public void updateUser(User user, List<Product> products) {
+    public void updateUser(User user, Set<Product> products) {
         RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
         String url = BASE_URL + "/user/" + user.getEmail();
         JSONObject params = new JSONObject();
@@ -226,5 +227,33 @@ public class AppApiVolley implements AppApi {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public Integer getControlSum(String email) {
+        RequestQueue requestQueue = Volley.newRequestQueue(fragment.requireContext());
+        String url = BASE_URL + "/getSum/" + email;
+        final Integer[] globalControlSum = {0};
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Integer controlSum;
+                try {
+                    controlSum = response.getInt("controlSum");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                globalControlSum[0] = controlSum;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }
+        );
+        requestQueue.add(jsonObjectRequest);
+        return globalControlSum[0];
     }
 }

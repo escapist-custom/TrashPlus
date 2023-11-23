@@ -6,12 +6,12 @@ import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
-import java.util.List;
+import java.util.Set;
 
 public class GetProductsByUserIdRunnable implements Runnable {
     private ProductTrashPlusDao productDao;
     private UserTrashPlusDao userDao;
-    private static List<Product> products;
+    private static Set<Product> products;
 
     public GetProductsByUserIdRunnable(AppDatabase db) {
         this.productDao = db.trashPlusDaoProduct();
@@ -21,10 +21,10 @@ public class GetProductsByUserIdRunnable implements Runnable {
     @Override
     public void run() {
         User user = userDao.getUser();
-        products = productDao.getAllProducts(user.getId());
+        products = (Set<Product>) productDao.getAllProducts(user.getId());
     }
 
-    public static List<Product> getProducts() {
+    public static Set<Product> getProducts() {
         return products;
     }
 }
