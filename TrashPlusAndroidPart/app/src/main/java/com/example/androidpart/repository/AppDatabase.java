@@ -30,8 +30,9 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, TrashPlusContractUser.UserEntry.DATABASE_NAME)
+                            .fallbackToDestructiveMigrationFrom(8)
                             .addMigrations(MIGRATION_2_3, MIGRATION_1_2, MIGRATION_3_4,
-                                    MIGRATION_4_5)
+                                    MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                             .build();
                     return INSTANCE;
                 }
@@ -67,6 +68,20 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE products ADD cover_code TEXT;");
+        }
+    };
+
+    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE users ADD control_sum INTEGER DEFAULT 0 NOT NULL;");
+        }
+    };
+
+    public static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE products ADD flag_added INTEGER NOT NULL DEFAULT(0);");
         }
     };
 

@@ -10,33 +10,54 @@ import com.example.androidpart.repository.product.TrashPlusContractProduct;
 @Entity(tableName = TrashPlusContractProduct.ProductEntry.TABLE_NAME)
 public class Product{
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_ID)
-    private long id;
-
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_NAME)
-    private String nameOfProduct;
-
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_PRODUCT_CODE)
-    private long productCode;
-
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_INFO)
-    private String information;
-
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_PHOTO_LINK)
-    private String photoLink;
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_COVER_CODE)
+    private String classOfCover;
 
     @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_USER_ID)
     private long userId;
 
-    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_COVER_CODE)
-    private String classOfCover;
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_JUST_ADDED)
+    private boolean justAdded = false;
 
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_NAME)
+    private String nameOfProduct;
+
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_INFO)
+    private String information;
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_ID)
+    private long id;
+
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_PRODUCT_CODE)
+    private long productCode;
+
+    @ColumnInfo(name = TrashPlusContractProduct.ProductEntry.COLUMN_PHOTO_LINK)
+    private String photoLink;
+
+    public boolean isJustAdded() {
+        return justAdded;
+    }
+
+    public void setJustAdded(boolean justAdded) {
+        this.justAdded = justAdded;
+    }
+
+    @Ignore
     public Product(String nameOfProduct, long productCode, String information, String photoLink) {
         this.nameOfProduct = nameOfProduct;
         this.productCode = productCode;
         this.information = information;
         this.photoLink = photoLink;
+    }
+
+    public Product(String nameOfProduct, long productCode, String information, String photoLink,
+                   String classOfCover) {
+        this.nameOfProduct = nameOfProduct;
+        this.productCode = productCode;
+        this.information = information;
+        this.photoLink = photoLink;
+        this.classOfCover = classOfCover;
     }
 
     public String getClassOfCover() {
@@ -96,6 +117,8 @@ public class Product{
                 ", nameOfProduct='" + nameOfProduct + '\'' +
                 ", productCode=" + productCode +
                 ", information='" + information + '\'' +
+                ", classOfCover=" + classOfCover + '\'' +
+                ", justAdded=" + justAdded + '\'' +
                 ", photoLink='" + photoLink + '\'' +
                 '}';
     }

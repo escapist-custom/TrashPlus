@@ -3,7 +3,6 @@ package com.example.androidpart.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +25,9 @@ import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 import com.example.androidpart.runnable.product.GetProductsByUserIdRunnable;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,18 +35,21 @@ public class InformationFragment extends Fragment {
     private InformationFragmentBinding binding;
 
     // Product
-    private List<Product> userProduct = new ArrayList<>();
+    private Set<Product> userProduct = new HashSet<>();
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         binding = InformationFragmentBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         ExecutorService service = Executors.newFixedThreadPool(2);
 
-        GetUserAndProductRunnable userProductRunnable = new GetUserAndProductRunnable(MainActivity.db);
-        GetProductsByUserIdRunnable productsRunnable = new GetProductsByUserIdRunnable(MainActivity.db);
+        GetUserAndProductRunnable userProductRunnable =
+                new GetUserAndProductRunnable(MainActivity.db);
+        GetProductsByUserIdRunnable productsRunnable =
+                new GetProductsByUserIdRunnable(MainActivity.db);
         service.execute(userProductRunnable);
         service.execute(productsRunnable);
 
@@ -83,7 +86,8 @@ public class InformationFragment extends Fragment {
         @Override
         public void run() {
             userOutput = userDao.getUser();
-            userProduct = productDao.getAllProducts(userOutput.getId());
+            List<Product> productList = productDao.getAllProducts(userOutput.getId());
+            userProduct = new HashSet<>(productList);
             userHandler = new Handler(Looper.getMainLooper());
             userHandler.post(new Runnable() {
                 @Override

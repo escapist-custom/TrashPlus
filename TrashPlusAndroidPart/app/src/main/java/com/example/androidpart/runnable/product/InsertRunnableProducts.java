@@ -6,13 +6,15 @@ import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InsertRunnableProducts implements Runnable {
-    private final List<Product> inputProducts;
+    private final Set<Product> inputProducts;
     private final ProductTrashPlusDao productTrashPlusDao;
     private final UserTrashPlusDao userTrashPlusDao;
 
-    public InsertRunnableProducts(List<Product> inputProducts, AppDatabase db) {
+    public InsertRunnableProducts(Set<Product> inputProducts, AppDatabase db) {
         this.inputProducts = inputProducts;
         this.productTrashPlusDao = db.trashPlusDaoProduct();
         this.userTrashPlusDao = db.trashPlusDaoUser();
@@ -20,11 +22,12 @@ public class InsertRunnableProducts implements Runnable {
 
     @Override
     public void run() {
+        List<Product> productList = inputProducts.stream().collect(Collectors.toList());
         productTrashPlusDao.deleteAll();
         if (userTrashPlusDao.getUser() != null) {
-            for (int i = 0; i < inputProducts.size(); i++) {
-                inputProducts.get(i).setUserId(userTrashPlusDao.getUser().getId());
-                productTrashPlusDao.insert(inputProducts.get(i));
+            for (int i = 0; i < productList.size(); i++) {
+                productList.get(i).setUserId(userTrashPlusDao.getUser().getId());
+                productTrashPlusDao.insert(productList.get(i));
             }
         }
     }

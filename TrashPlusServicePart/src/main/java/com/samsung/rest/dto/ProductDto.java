@@ -1,10 +1,7 @@
 package com.samsung.rest.dto;
 
 import com.samsung.domain.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -17,6 +14,8 @@ public class ProductDto {
     private long productCode;
     private String information;
     private String linkPhoto;
+    private String classOfCover;
+
 
     public static Product fromDtoToProduct(ProductDto productDto) {
         return Product.builder()
@@ -25,17 +24,17 @@ public class ProductDto {
                 .productCode(productDto.getProductCode())
                 .information(productDto.getInformation())
                 .linkPhoto(productDto.getLinkPhoto())
+                .classOfCover(productDto.getClassOfCover())
                 .build();
     }
 
     public static ProductDto toDto(Product product) {
         return ProductDto.builder()
-                .productId(product.getProductId())
                 .nameOfProduct(product.getNameOfProduct())
                 .productCode(product.getProductCode())
                 .information(product.getInformation())
                 .linkPhoto(product.getLinkPhoto())
+                .classOfCover(product.getClassOfCover())
                 .build();
     }
-
 }

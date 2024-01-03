@@ -1,0 +1,26 @@
+version: '1'
+
+services:
+  backend:
+    environment:
+      - POSTGRES_DB=postgres
+  app:
+    ports:
+      - 8080:8080
+    image: 'trashplus:latest'
+    build:
+      context: .
+    container_name: trashplus
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=12345
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  db:
+    image: 'postgres:latest'
+    container_name: trashplus-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345

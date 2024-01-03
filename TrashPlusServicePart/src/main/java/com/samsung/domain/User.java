@@ -16,12 +16,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", unique = true)
-    private long userId;
+    private Long userId;
 
     @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = true)
     private String address;
 
     @Column(name = "email", unique = true)
@@ -30,8 +30,19 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @Column(name = "control_sum")
+    private Integer controlSum;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "link", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId"))
-    private List<Product> products = new ArrayList<>();
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "product_id"))
+    private Set<Product> products = new HashSet<>();
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public void cleanProducts() {
+        this.products.clear();
+    }
 }

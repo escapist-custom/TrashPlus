@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,17 +52,13 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
     public final MultiFormatReader multiFormatReader;
     private AppApiVolley appApiVolley;
     private static Context context;
-    private Fragment fragment;
     public static Result result;
     public static boolean scanFlag = true;
-    private final ProductTrashPlusDao productTrashPlusDao;
     public ImageProxy imageProxy;
     private static String classOfProduct = "";
 
     public QRAnalyzer(Context context, AppDatabase db, Fragment fragment) {
         multiFormatReader = new MultiFormatReader();
-        productTrashPlusDao = db.trashPlusDaoProduct();
-        this.fragment = fragment;
         this.context = context;
         Map<DecodeHintType, Object> hintTypeObjectMap = new EnumMap<DecodeHintType, Object>(
                 DecodeHintType.class
@@ -101,6 +98,7 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
                 barcode = result.getText().split("/")[0];
                 classOfProduct = result.getText().split("/")[1];
             }
+            Log.i("CLASS_PRODUCT", classOfProduct.toString());
             GetProductByBarcode getProductByBarcode = new GetProductByBarcode(MainActivity.db,
                     barcode, result, classOfProduct);
             service.execute(getProductByBarcode);
@@ -131,6 +129,7 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     public static void launchDialogSuccess(Product product) {
+        Log.i("PRODUCT", product.toString());
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.fragment_bottom_sheet);
@@ -398,7 +397,6 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
         private final ProductTrashPlusDao productDao;
         private final UserTrashPlusDao userDao;
         private Handler handler;
-
         private Product product;
         private final String barcode;
         private final Result result;
@@ -417,13 +415,14 @@ public class QRAnalyzer implements ImageAnalysis.Analyzer {
             if (productDao.getProductByBarcode(barcode) == null) {
                 if (barcode != null) {
                     if (AppApiVolley.requestFlag) {
-                        appApiVolley.getProduct(barcode);
+                        appApiVolley.getProduct(barcode, classOfProduct);
                         AppApiVolley.requestFlag = false;
                     }
                 }
             } else {
                 product = productDao.getProductByBarcode(barcode);
                 User user = userDao.getUser();
+                Log.i("PRODUCT_IN_DB", product.toString());
                 product.setClassOfCover(coverCode);
                 product.setUserId(user.getId());
                 productDao.update(product);

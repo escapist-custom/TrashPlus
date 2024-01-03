@@ -11,9 +11,11 @@ import java.util.Optional;
 public interface ProductService {
 
 
-    ProductDto findByCode(long code);
+    ProductDto findByCodeDb(long code, String classOfCover);
+    Product findByCodeAPI(long code, String classOfCover);
 
-    Optional<Product> findProduct(long code);
+    Product findProduct(long code);
+
     List<Product> findAll();
 
     Product addProduct(ProductDto productDto);
