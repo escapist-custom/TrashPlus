@@ -1,13 +1,16 @@
 package com.example.androidpart.runnable.product;
 
+import android.util.Log;
+
 import com.example.androidpart.domain.Product;
+import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
 import com.example.androidpart.repository.product.dao.ProductTrashPlusDao;
 import com.example.androidpart.repository.user.dao.UserTrashPlusDao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class InsertRunnableProducts implements Runnable {
     private final Set<Product> inputProducts;
@@ -22,11 +25,13 @@ public class InsertRunnableProducts implements Runnable {
 
     @Override
     public void run() {
-        List<Product> productList = inputProducts.stream().collect(Collectors.toList());
+        List<Product> productList = new ArrayList<>(inputProducts);
+        Log.i("productList", productList.toString());
         productTrashPlusDao.deleteAll();
-        if (userTrashPlusDao.getUser() != null) {
+        User user = userTrashPlusDao.getUser();
+        if (user != null) {
             for (int i = 0; i < productList.size(); i++) {
-                productList.get(i).setUserId(userTrashPlusDao.getUser().getId());
+                productList.get(i).setUserId(user.getId());
                 productTrashPlusDao.insert(productList.get(i));
             }
         }

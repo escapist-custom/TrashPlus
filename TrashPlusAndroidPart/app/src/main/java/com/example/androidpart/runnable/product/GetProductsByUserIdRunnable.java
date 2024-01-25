@@ -1,5 +1,6 @@
 package com.example.androidpart.runnable.product;
 
+import com.example.androidpart.domain.DataTransfer;
 import com.example.androidpart.domain.Product;
 import com.example.androidpart.domain.User;
 import com.example.androidpart.repository.AppDatabase;
@@ -25,9 +26,7 @@ public class GetProductsByUserIdRunnable implements Runnable {
         User user = userDao.getUser();
         List<Product> productList = productDao.getAllProducts(user.getId());
         products = productList.stream().collect(Collectors.toSet());
-    }
-
-    public static Set<Product> getProducts() {
-        return products;
+        DataTransfer dataTransfer = new DataTransfer();
+        dataTransfer.SetProducts(products);
     }
 }

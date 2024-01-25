@@ -75,7 +75,6 @@ public class InformationFragment extends Fragment {
         private User userOutput;
         private final UserTrashPlusDao userDao;
         private final ProductTrashPlusDao productDao;
-
         private Handler userHandler;
 
         public GetUserAndProductRunnable(AppDatabase database) {

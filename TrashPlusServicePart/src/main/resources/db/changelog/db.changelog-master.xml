@@ -5,8 +5,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <!--Creating the tables-->
-    <include file="db/changelog/7.0/2024-01-03--0001-user.xml"/>
-    <include file="db/changelog/7.0/2024-01-03--0002-product.xml"/>
-    <include file="db/changelog/7.0/2024-01-03--0003-user_product.xml"/>
+    <include file="db/changelog/8.0/2024-01-04--0001-user.xml"/>
+    <include file="db/changelog/8.0/2024-01-04--0002-product.xml"/>
+    <include file="db/changelog/8.0/2024-01-04--0003-user_product.xml"/>
 
 </databaseChangeLog>
