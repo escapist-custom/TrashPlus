@@ -75,7 +75,6 @@ public class AppApiVolley implements AppApi {
 
                             service.execute(insertRunnableUser);
                             service.execute(insertRunnableProducts);
-
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -91,7 +90,7 @@ public class AppApiVolley implements AppApi {
                     ((LoginFragment) fragment).makeToastBadCredentials();
                 }
             }
-        } );
+        });
         requestQueue.add(jsonObjectRequest);
     }
 

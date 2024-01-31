@@ -29,6 +29,7 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <View
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/main_green"
@@ -103,10 +104,10 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toEndOf="@id/dl_user_left"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_my_products"
-        app:layout_constraintEnd_toStartOf="@+id/dl_user_right"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bar"

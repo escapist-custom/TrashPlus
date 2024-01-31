@@ -12,6 +12,9 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/product_icon"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_of_product" />
@@ -23,6 +26,8 @@
         android:text="@string/name"
         android:layout_margin="7dp"
         android:layout_weight="1"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:textColor="@color/black"
         />
 
@@ -34,6 +39,9 @@
         android:text="@string/short_product_info"
         android:layout_margin="7dp"
         android:layout_weight="1"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
         />
 
 </LinearLayout>

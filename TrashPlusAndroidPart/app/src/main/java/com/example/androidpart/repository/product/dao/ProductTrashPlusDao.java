@@ -14,10 +14,8 @@ import java.util.List;
 @Dao
 public interface ProductTrashPlusDao {
 
-    @Query("SELECT products.id, products.name, products.product_code, products.information, " +
-            "products.photo_link, products.user_id, products.cover_code, products.flag_added FROM products WHERE " +
-            " products.user_id = :id")
-    List<Product> getAllProducts(long id);
+    @Query("SELECT * FROM products ")
+    List<Product> getAllProducts();
 
     @Query("SELECT * FROM products WHERE product_code = :barcode")
     Product getProductByBarcode(String barcode);

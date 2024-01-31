@@ -24,9 +24,10 @@ public class GetProductsByUserIdRunnable implements Runnable {
     @Override
     public void run() {
         User user = userDao.getUser();
-        List<Product> productList = productDao.getAllProducts(user.getId());
+        List<Product> productList = productDao.getAllProducts();
         products = productList.stream().collect(Collectors.toSet());
         DataTransfer dataTransfer = new DataTransfer();
         dataTransfer.SetProducts(products);
+        dataTransfer.SetUser(user);
     }
 }

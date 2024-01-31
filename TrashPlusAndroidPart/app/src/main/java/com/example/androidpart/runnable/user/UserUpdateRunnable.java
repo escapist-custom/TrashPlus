@@ -37,7 +37,7 @@ public class UserUpdateRunnable implements Runnable {
     @Override
     public void run() {
         User user = userDao.getUser();
-        List<Product> productList = productDao.getAllProducts(user.getId());
+        List<Product> productList = productDao.getAllProducts();
         Gson gson = new Gson();
         String stringUserProducts = gson.toJson(productList);
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -44,7 +44,7 @@ public class InformationFragment extends Fragment {
         binding = InformationFragmentBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        ExecutorService service = Executors.newFixedThreadPool(2);
+        ExecutorService service = Executors.newFixedThreadPool(5);
 
         GetUserAndProductRunnable userProductRunnable =
                 new GetUserAndProductRunnable(MainActivity.db);
@@ -54,20 +54,18 @@ public class InformationFragment extends Fragment {
         service.execute(productsRunnable);
 
         binding.navBar.getMenu().findItem(R.id.person).setChecked(true);
+
         binding.navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch(item.getItemId()) {
                     case(R.id.scanner):
-                        /*getActivity().getSupportFragmentManager().beginTransaction()
-                                .remove(InformationFragment.this).commit();*/
-                        NavHostFragment.findNavController(InformationFragment.this).navigate(R.id.action_informationFragment_to_scanningFragment);
+                        NavHostFragment.findNavController(InformationFragment.this)
+                                .navigate(R.id.action_informationFragment_to_scanningFragment);
                 }
                 return false;
             }
         });
-        service.shutdown();
         return view;
     }
 
@@ -85,7 +83,7 @@ public class InformationFragment extends Fragment {
         @Override
         public void run() {
             userOutput = userDao.getUser();
-            List<Product> productList = productDao.getAllProducts(userOutput.getId());
+            List<Product> productList = productDao.getAllProducts();
             userProduct = new HashSet<>(productList);
             userHandler = new Handler(Looper.getMainLooper());
             userHandler.post(new Runnable() {
@@ -99,9 +97,30 @@ public class InformationFragment extends Fragment {
         }
     }
 
+    static class DeleteUserAndProduct implements Runnable {
+        private final UserTrashPlusDao userDao;
+        private final ProductTrashPlusDao productDao;
+
+        public DeleteUserAndProduct(AppDatabase database) {
+            this.userDao = database.trashPlusDaoUser();
+            this.productDao = database.trashPlusDaoProduct();
+        }
+
+        @Override
+        public void run() {
+            userDao.deleteAll();
+            productDao.deleteAll();
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void exit() {
+        NavHostFragment.findNavController(InformationFragment.this)
+                .navigate(R.id.action_informationFragment_to_loginFragment);
     }
 }

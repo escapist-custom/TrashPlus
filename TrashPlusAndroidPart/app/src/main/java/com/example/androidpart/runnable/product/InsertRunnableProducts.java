@@ -29,10 +29,14 @@ public class InsertRunnableProducts implements Runnable {
         Log.i("productList", productList.toString());
         productTrashPlusDao.deleteAll();
         User user = userTrashPlusDao.getUser();
+        List<Product> allProducts = productTrashPlusDao.getAllProducts();
+        Log.i("products", allProducts.toString());
         if (user != null) {
             for (int i = 0; i < productList.size(); i++) {
-                productList.get(i).setUserId(user.getId());
-                productTrashPlusDao.insert(productList.get(i));
+                if (!allProducts.contains(productList.get(i))) {
+                    productList.get(i).setUserId(user.getId());
+                    productTrashPlusDao.insert(productList.get(i));
+                }
             }
         }
     }
